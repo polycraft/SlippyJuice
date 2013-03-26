@@ -1,7 +1,7 @@
-package com.polycraft.test.equipment;
+package com.polycraft.test;
 
-import com.polycraft.slippyjuice.player.info.Caracteristics;
-import com.polycraft.slippyjuice.player.info.ItemStuff;
+import com.polycraft.slippyjuice.stuff.Caracteristics;
+import com.polycraft.slippyjuice.stuff.ItemStuff;
 
 public class TestItems {
 	public static void main(String[] args) {
