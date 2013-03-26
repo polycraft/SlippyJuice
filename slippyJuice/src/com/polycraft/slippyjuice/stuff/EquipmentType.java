@@ -1,4 +1,4 @@
-package com.polycraft.slippyjuice.player.info;
+package com.polycraft.slippyjuice.stuff;
 
 public enum EquipmentType {
 	HELMET("helmet"), ARMOR("armor"), PANT("pant"), GLASSES("glasses");

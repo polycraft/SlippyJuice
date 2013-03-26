@@ -1,4 +1,4 @@
-package com.polycraft.slippyjuice.player.info;
+package com.polycraft.slippyjuice.stuff;
 
 public enum StuffType {
 	EQUIPMENT("equipment"), ITEM("item");

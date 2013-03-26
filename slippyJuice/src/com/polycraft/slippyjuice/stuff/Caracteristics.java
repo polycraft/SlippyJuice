@@ -1,7 +1,8 @@
-package com.polycraft.slippyjuice.player.info;
+package com.polycraft.slippyjuice.stuff;
 
 public enum Caracteristics {
-	SPEED("speed"), HEALTH("health"), VOMIT("vomit"), RESISTANCE("resist");
+	SPEED("speed"), HEALTH("health"), VOMIT("vomit"), RESISTANCE("resist"), OVERJUICE(
+			"overjuice"), WEIGHT("weight");
 
 	private final String code;
 
