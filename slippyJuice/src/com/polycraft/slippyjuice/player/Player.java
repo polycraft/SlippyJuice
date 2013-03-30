@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.polycraft.slippyjuice.stuff.Caracteristics;
+import com.polycraft.slippyjuice.stuff.EquipmentStuff;
+import com.polycraft.slippyjuice.stuff.EquipmentType;
 import com.polycraft.slippyjuice.stuff.ItemStuff;
 import com.polycraft.slippyjuice.stuff.Stuff;
 
 public class Player {
 	private PlayerInformation playerInformation;
-	private Equipment equipment;
 	private List<Stuff> stuffs;
+	private Map<EquipmentType, Stuff> inventory;
 	private Map<Caracteristics, Float> properties;
 
 	public Player(PlayerInformation information) {
@@ -38,7 +40,7 @@ public class Player {
 		this.properties.put(Caracteristics.WEIGHT, weight);
 		this.properties.put(Caracteristics.VOMIT, vomit);
 		this.properties.put(Caracteristics.OVERJUICE, overJuice);
-		this.equipment = new Equipment();
+		this.inventory = new HashMap<EquipmentType, Stuff>();
 		this.stuffs = new ArrayList<Stuff>();
 	}
 
@@ -46,19 +48,36 @@ public class Player {
 		return playerInformation;
 	}
 
-	public void equip(Stuff stuffToEquip) {
-		if (this.stuffs.contains(stuffToEquip)) {
-			Stuff holdStuff = this.equipment.equip(stuffToEquip);
-			if (holdStuff != null) {
-				this.stuffs.add(holdStuff);
-			}
-			this.stuffs.remove(stuffToEquip);
+	public Stuff equip(Stuff stuffToEquip) {
+		Stuff holdStuff = null;
+		// verifie si c'est un equipement et non un autre type de stuff
+		if (stuffs.contains(stuffToEquip)
+				&& EquipmentStuff.class.isInstance(stuffToEquip)) {
+			EquipmentStuff equipment = (EquipmentStuff) stuffToEquip;
+			holdStuff = this.inventory.put(equipment.getEquipmentType(),
+					equipment);
+		} else {
+			System.out.println("NOT AN EQUIPMENT : " + stuffToEquip);
 		}
+		if (null != holdStuff) {
+			this.stuffs.add(holdStuff);
+		}
+
+		return holdStuff;
 	}
 
 	public void unequip(Stuff stuffToUnEquip) {
-		this.equipment.unequip(stuffToUnEquip);
-		this.stuffs.add(stuffToUnEquip);
+		// si equipement et dans inventaire OK
+		if (inventory.containsValue(stuffToUnEquip)
+				&& EquipmentStuff.class.isInstance(stuffToUnEquip)) {
+			EquipmentStuff equipment = (EquipmentStuff) stuffToUnEquip;
+			this.inventory.remove(equipment.getEquipmentType());
+			this.stuffs.add(equipment);
+		} else {
+			System.out.println("NOT AN EQUIPMENT OR NOT IN THE EQUIPMENT: "
+					+ stuffToUnEquip);
+		}
+
 	}
 
 	public void use(Stuff stuff) {
@@ -95,8 +114,14 @@ public class Player {
 			outStuffs += "		" + stuff.toString();
 		}
 
+		String outInventory = "";
+		for (EquipmentType key : inventory.keySet()) {
+			EquipmentStuff equip = (EquipmentStuff) inventory.get(key);
+			outInventory += "		" + equip.toString();
+		}
+
 		return playerInformation.toString() + "(" + outProperties + ")"
-				+ "\n	EQUIPED : \n" + equipment.toString() + "\n	STUFFS : \n"
+				+ "\n	EQUIPED : \n" + outInventory + "\n	STUFFS : \n"
 				+ outStuffs;
 	}
 }
