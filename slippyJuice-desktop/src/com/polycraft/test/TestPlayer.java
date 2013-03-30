@@ -7,7 +7,7 @@ import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
 import com.polycraft.slippyjuice.stuff.ItemStuff;
 
-public class TestPlayerProperties {
+public class TestPlayer {
 	public static void main(String[] args) {
 
 		// ========= Test equipement Player ====== //
@@ -23,8 +23,8 @@ public class TestPlayerProperties {
 				2000, 1, EquipmentType.ARMOR, Caracteristics.SPEED, 100);
 
 		// creeer d'un item
-		ItemStuff item1 = new ItemStuff("item1", "blazdbla", 31, 5,
-				Caracteristics.SPEED, 21);
+		ItemStuff item1 = (ItemStuff) new ItemStuff("item1", "blazdbla", 31, 5,
+				Caracteristics.SPEED, 21).addEffect(Caracteristics.HEALTH, 500);
 
 		// un joueur
 		PlayerInformation playerInformation = new PlayerInformation("Bob", 10,
