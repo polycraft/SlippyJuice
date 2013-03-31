@@ -1,4 +1,4 @@
-package com.polycraft.test;
+package com.polycraft.test.models;
 
 import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.ItemStuff;

@@ -1,4 +1,4 @@
-package com.polycraft.test;
+package com.polycraft.test.models;
 
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
