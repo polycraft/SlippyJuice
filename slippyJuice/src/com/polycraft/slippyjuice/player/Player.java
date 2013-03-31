@@ -83,7 +83,7 @@ public class Player {
 	public void use(Stuff stuff) {
 		if (ItemStuff.class.isInstance(stuff)) {
 			this.stuffs.remove(stuff);
-			useEffect((ItemStuff) stuff);
+			useEffects((ItemStuff) stuff);
 		}
 	}
 
@@ -91,7 +91,7 @@ public class Player {
 		this.stuffs.add(stuff);
 	}
 
-	private void useEffect(ItemStuff item) {
+	private void useEffects(ItemStuff item) {
 		for (Caracteristics caracteristics : Caracteristics.values()) {
 			Float temp = new Float(this.properties.get(caracteristics)
 					.floatValue());

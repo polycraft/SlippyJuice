@@ -16,6 +16,10 @@ public class PlayerInformation {
 
 	}
 
+	public void addCoins(Integer coinsToAdd) {
+		coins += coins;
+	}
+
 	public String getPlayername() {
 		return playername;
 	}
