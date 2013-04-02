@@ -2,18 +2,20 @@ package com.polycraft.slippyjuice.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.polycraft.slippyjuice.SlippyJuice;
+import com.polycraft.slippyjuice.renderers.MainMenuRenderer;
 
 public class MainMenuScreen extends SlippyJuiceScreen {
-
 	public MainMenuScreen(SlippyJuice game) {
 		super(game);
-		// TODO Auto-generated constructor stub
+		renderer = new MainMenuRenderer();
 	}
 
 	@Override
 	public void render(float delta) {
+		renderer.render(delta);
 		if (Gdx.input.justTouched())
 			game.setGameLoopScreen(); // test switching screens
+
 	}
 
 	@Override
