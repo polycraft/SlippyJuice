@@ -18,19 +18,27 @@ import com.polycraft.slippyjuice.box2d.BodyBuilder;
 import com.polycraft.slippyjuice.box2d.JointBuilder;
 import com.polycraft.slippyjuice.renderers.Renderer;
 
-public class TestRendererPhysic extends Renderer {
+public class TestRendererTech1 extends Renderer {
 
 	private World world;
 	private BodyBuilder bodyBuilder;
 	private JointBuilder jointBuilder;
 	Body bodyA;
 	Body bodyB;
+	Body bodyC;
+	Body bodyD;
+	Body bodyE;
+	Body bodyF;
 	Sprite spriteA;
 	Sprite spriteB;
+	Sprite spriteC;
+	Sprite spriteD;
+	Sprite spriteE;
+	Sprite spriteF;
 
 	float stateTime;
 
-	public TestRendererPhysic() {
+	public TestRendererTech1() {
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
@@ -41,47 +49,62 @@ public class TestRendererPhysic extends Renderer {
 		batch = new SpriteBatch();
 		stage = new Stage(width, height, true, batch);
 
-		world = new World(new Vector2(0, -100), true);
+		world = new World(new Vector2(0, -200), true);
 
 		bodyBuilder = new BodyBuilder(world);
 
 		bodyA = bodyBuilder
 				.fixture(
-						bodyBuilder.fixtureDefBuilder().circleShape(1f)
-								.restitution(1).density(1).friction(10))
-				.position(64, 64).mass(1f).type(BodyType.StaticBody).build();
+						bodyBuilder.fixtureDefBuilder().circleShape(0)
+								.restitution(0).density(0).friction(10))
+				.position(0, 0).mass(1f).type(BodyType.StaticBody).build();
 		bodyB = bodyBuilder
 				.fixture(
 
-						bodyBuilder.fixtureDefBuilder().circleShape(1f)
-								.restitution(1).density(1).friction(10))
-				.position(0, 0).inertia(0.2f).mass(500)
+						bodyBuilder.fixtureDefBuilder().circleShape(0)
+								.restitution(0).density(0).friction(100))
+				.position(0, 0).inertia(1f).mass(10f)
+				.type(BodyType.DynamicBody).build();
+		bodyC = bodyBuilder
+				.fixture(
+
+						bodyBuilder.fixtureDefBuilder().circleShape(0)
+								.restitution(100).density(1).friction(0.1f))
+				.position(0, 0).inertia(10f).mass(0.1f)
 				.type(BodyType.DynamicBody).build();
 
 		// bodyB.setAngularVelocity(2);
 
 		jointBuilder = new JointBuilder(world);
 
-		Joint joint = jointBuilder.revoluteJoint().bodyA(bodyA, 0, 0)
-				.bodyB(bodyB, 0, 64).collideConnected(false).build();
+		Joint joint1 = jointBuilder.revoluteJoint().bodyA(bodyA, -5, 14)
+				.bodyB(bodyB, 32, 0).collideConnected(false).build();
+		Joint joint2 = jointBuilder.revoluteJoint().bodyA(bodyA, -5, 14)
+				.bodyB(bodyC, 32, 0).collideConnected(false).build();
 
-		Texture texture = new Texture(
-				Gdx.files.internal("data/groundPiece.png"));
+		Texture texture = new Texture(Gdx.files.internal("data/boule.png"));
+		Texture textureBody = new Texture(Gdx.files.internal("data/body.png"));
+		Texture textureArm = new Texture(
+				Gdx.files.internal("data/right_arm.png"));
 
-		spriteA = new Sprite(texture);
-		spriteB = new Sprite(texture);
+		spriteA = new Sprite(textureBody);
 
+		spriteB = new Sprite(textureArm);
+		spriteC = new Sprite(textureArm);
+		// spriteC.setOrigin(32, 0);
 	}
 
 	@Override
 	public void render(float delta) {
-		world.step(1 / 10f, 6, 2);
+		world.step(1 / 32f, 6, 2);
 
 		spriteA.setPosition(bodyA.getPosition().x, bodyA.getPosition().y);
 		spriteA.setRotation(bodyA.getAngle() * MathUtils.radiansToDegrees);
 
 		spriteB.setPosition(bodyB.getPosition().x, bodyB.getPosition().y);
-		spriteB.setRotation(bodyB.getAngle() * MathUtils.radiansToDegrees);
+		spriteB.setRotation(bodyB.getAngle() * MathUtils.radiansToDegrees - 90);
+		spriteC.setPosition(bodyC.getPosition().x, bodyC.getPosition().y);
+		spriteC.setRotation(bodyC.getAngle() * MathUtils.radiansToDegrees - 90);
 		// init the background color
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		// actualise le background
@@ -89,6 +112,7 @@ public class TestRendererPhysic extends Renderer {
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
+		spriteC.draw(batch);
 		spriteA.draw(batch);
 		spriteB.draw(batch);
 		batch.end();
@@ -100,5 +124,8 @@ public class TestRendererPhysic extends Renderer {
 			camera.unproject(touchPos);
 			bodyA.setTransform(touchPos.x, touchPos.y, 0);
 		}
+
+		System.out.println("angleB:"
+				+ (bodyC.getAngle() * MathUtils.radiansToDegrees));
 	}
 }

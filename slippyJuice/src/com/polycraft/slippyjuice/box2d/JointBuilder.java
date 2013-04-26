@@ -92,9 +92,8 @@ public class JointBuilder {
 		 * @param upper
 		 * @return
 		 */
-		public RevoluteJointBuilder enableLimit(boolean enableLimit,
-				float lower, float upper) {
-			revoluteJointDef.enableLimit = enableLimit;
+		public RevoluteJointBuilder enableLimit(float lower, float upper) {
+			revoluteJointDef.enableLimit = true;
 			revoluteJointDef.lowerAngle = lower;
 			revoluteJointDef.upperAngle = upper;
 			return this;
@@ -114,6 +113,7 @@ public class JointBuilder {
 		this.world = world;
 		this.distanceJointBuilder = new DistanceJointBuilder();
 		this.revoluteJointBuilder = new RevoluteJointBuilder();
+
 	}
 
 	public DistanceJointBuilder distanceJoint() {

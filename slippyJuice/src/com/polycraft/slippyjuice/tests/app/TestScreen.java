@@ -9,7 +9,7 @@ public class TestScreen implements Screen {
 
 	public TestScreen(TestGame testGame) {
 		// renderer = new TestRenderer();
-		renderer = new TestRendererPhysic();
+		renderer = new TestRendererTech2();
 		this.game = testGame;
 	}
 
