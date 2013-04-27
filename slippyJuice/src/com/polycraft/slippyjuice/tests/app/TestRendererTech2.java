@@ -8,12 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.polycraft.slippyjuice.box2d.BodyBuilder;
-import com.polycraft.slippyjuice.box2d.JointBuilder;
 import com.polycraft.slippyjuice.renderers.Renderer;
 import com.polycraft.slippyjuice.scene.character.Child;
 import com.polycraft.slippyjuice.scene.character.Human;
@@ -21,7 +17,6 @@ import com.polycraft.slippyjuice.scene.character.Parent;
 
 public class TestRendererTech2 extends Renderer {
 
-	private World world;
 	Human human;
 	Parent parent;
 	Child child;
@@ -58,9 +53,6 @@ public class TestRendererTech2 extends Renderer {
 		AssetManager manager = new AssetManager();
 		manager.load("data/body.png", Texture.class);
 
-		world = new World(new Vector2(0, 0), false);
-		BodyBuilder bodyBuilder = new BodyBuilder(world);
-		JointBuilder jointBuilder = new JointBuilder(world);
 		human = new Human(100, 100);
 
 		stage.addActor(human);
@@ -69,7 +61,6 @@ public class TestRendererTech2 extends Renderer {
 
 	@Override
 	public void render(float delta) {
-		// world.step(1 / 250f, 6, 2);
 		// init the background color
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		// actualise le background
