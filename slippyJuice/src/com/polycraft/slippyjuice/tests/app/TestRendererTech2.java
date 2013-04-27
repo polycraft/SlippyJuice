@@ -3,24 +3,18 @@ package com.polycraft.slippyjuice.tests.app;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.GL10;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.polycraft.slippyjuice.renderers.Renderer;
-import com.polycraft.slippyjuice.scene.character.Child;
 import com.polycraft.slippyjuice.scene.character.Human;
-import com.polycraft.slippyjuice.scene.character.Parent;
 
 public class TestRendererTech2 extends Renderer {
 
 	Human human;
-	Parent parent;
-	Child child;
-	Sprite sprite;
 
 	public TestRendererTech2() {
 		float width = Gdx.graphics.getWidth();
@@ -34,26 +28,11 @@ public class TestRendererTech2 extends Renderer {
 		stage = new Stage(width, height, true, batch);
 		Gdx.input.setInputProcessor(stage);
 
-		parent = new Parent();
-		// parent.setRotation(30);
-		parent.setTransform(true);
-		// parent.setBounds(50, 50, 150, 150);
-		stage.addActor(parent);
-
-		child = new Child();
-		// child.setTransform(true);
-		// child.setBounds(10, 10, 35, 35);
-		// child.setOriginX(100);
-		// child.setRotation(45);
-		parent.addActor(child);
-
-		// Gdx.input.setInputProcessor(stage);
-
-		batch = new SpriteBatch(); // #12
+		batch = new SpriteBatch(); // #22
 		AssetManager manager = new AssetManager();
 		manager.load("data/body.png", Texture.class);
 
-		human = new Human(100, 100);
+		human = new Human(0, 0, 64, 64);
 
 		stage.addActor(human);
 
@@ -62,9 +41,9 @@ public class TestRendererTech2 extends Renderer {
 	@Override
 	public void render(float delta) {
 		// init the background color
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(2, 2, 2, 2);
 		// actualise le background
-		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT); // #14
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT); // #24
 
 		// batch.setProjectionMatrix(camera.combined);
 
@@ -75,47 +54,41 @@ public class TestRendererTech2 extends Renderer {
 		stage.draw();
 		// stage.act();
 
-		System.out.println("parent " + parent.getX() + "," + parent.getY()
-				+ " | child " + child.getX() + "," + child.getY());
-		// human.rotateLeftArm(testAngle);
-		// human.rotateRightArm(-testAngle);
-		// human.rotateRightLeg(+testAngle);
-		// human.rotateLeftLeg(-testAngle);
-		//
-		// if (testAngle > 0 && human.getLeftArm().getRotation() > 45) {
-		// testAngle = -testAngle;
-		// } else if (testAngle < 0 && human.getLeftArm().getRotation() < -45) {
-		// testAngle = -testAngle;
-		// }
-
 		if (Gdx.input.isTouched()) {
 			Vector3 touchPos = new Vector3();
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 
 			camera.unproject(touchPos);
+			human.setPosition(touchPos.x, touchPos.y);
 
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			human.rotateLeftArm(1);
+			human.rotateLeftArm(2);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+			human.rotateLeftArm(-2);
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-			human.rotateBody(1);
+			human.rotateBody(2);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+			human.rotateBody(-2);
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.I)) {
+			human.rotateRightLeg(2);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.K)) {
+			human.rotateRightLeg(-2);
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.O)) {
+			human.rotateHead(2);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.L)) {
+			human.rotateHead(-2);
 		}
 
 	}

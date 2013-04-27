@@ -15,10 +15,9 @@ public class Human extends Group {
 		public Body(Texture texture) {
 			super();
 			sprite = new Sprite(texture);
-			setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
+			setOrigin(0, 0);
 			setSize(texture.getWidth(), texture.getHeight());
-			setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
-			setPosition(0, 0);
+			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2);
 		}
 
 		@Override
@@ -40,7 +39,7 @@ public class Human extends Group {
 			sprite = new Sprite(texture);
 			setOrigin(texture.getWidth() / 2, texture.getHeight());
 			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(0, -15);
+			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2 - 15);
 		}
 
 		@Override
@@ -62,7 +61,9 @@ public class Human extends Group {
 			sprite = new Sprite(texture);
 			setOrigin(texture.getWidth() / 2, texture.getHeight());
 			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(-3, -45);
+			// setPosition(-3, -45);
+			setPosition(-texture.getWidth() / 2 - 3,
+					-texture.getHeight() / 2 - 45);
 		}
 
 		@Override
@@ -85,7 +86,9 @@ public class Human extends Group {
 			sprite = new Sprite(texture);
 			setOrigin(texture.getWidth() / 2, texture.getHeight());
 			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(0, 0);
+			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2 - 15);
+			setRotation(180);
+
 		}
 
 		@Override
@@ -107,38 +110,43 @@ public class Human extends Group {
 	private Leg rightLeg;
 	private Head head;
 
-	public Human(float x, float y) {
+	public Human(float x, float y, float width, float height) {
 		super();
+		setSize(width, height);
+		setOrigin(0, 0);
 		setPosition(x, y);
 		buildCharacter();
 	}
 
 	protected void buildCharacter() {
+		// Du plus éloigné au plus proche
+
+		// - Left Arm
+		leftArm = new Arm(new Texture(Gdx.files.internal("data/right_arm.png")));
+		this.addActor(leftArm);
+
+		// - Left Leg
+		leftLeg = new Leg(new Texture(Gdx.files.internal("data/right_leg.png")));
+		this.addActor(leftLeg);
+
 		// - Body
 		body = new Body(new Texture(Gdx.files.internal("data/body.png")));
 		body.setTransform(true);
 		this.addActor(body);
 
-		// - Left Arm
-		leftArm = new Arm(new Texture(Gdx.files.internal("data/right_arm.png")));
-		body.addActor(leftArm);
-
-		// - Right Arm
-		rightArm = new Arm(
-				new Texture(Gdx.files.internal("data/right_arm.png")));
-		body.addActor(rightArm);
-
-		// - Left Leg
-		leftLeg = new Leg(new Texture(Gdx.files.internal("data/right_leg.png")));
-		body.addActor(leftLeg);
+		// - Head
+		head = new Head(new Texture(Gdx.files.internal("data/head.png")));
+		this.addActor(head);
 
 		// - Right Leg
 		rightLeg = new Leg(
 				new Texture(Gdx.files.internal("data/right_leg.png")));
-		body.addActor(rightLeg);
-		// - Head
-		head = new Head(new Texture(Gdx.files.internal("data/head.png")));
-		// body.addActor(head);
+		this.addActor(rightLeg);
+
+		// - Right Arm
+		rightArm = new Arm(
+				new Texture(Gdx.files.internal("data/right_arm.png")));
+		this.addActor(rightArm);
 
 	}
 
@@ -148,7 +156,7 @@ public class Human extends Group {
 	}
 
 	public void rotateBody(float degrees) {
-		body.rotate(degrees);
+		this.rotate(degrees);
 	}
 
 	public void rotateLeftArm(float degrees) {
