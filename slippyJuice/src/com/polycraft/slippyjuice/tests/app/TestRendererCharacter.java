@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.polycraft.slippyjuice.renderers.Renderer;
+import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.scene.character.Character;
 
 public class TestRendererCharacter extends Renderer {
@@ -25,8 +25,8 @@ public class TestRendererCharacter extends Renderer {
 		camera.update();
 
 		batch = new SpriteBatch();
-		stage = new Stage(width, height, true, batch);
-		Gdx.input.setInputProcessor(stage);
+		scene = new Scene(width, height, true, batch);
+		Gdx.input.setInputProcessor(scene);
 
 		batch = new SpriteBatch(); // #22
 		AssetManager manager = new AssetManager();
@@ -34,7 +34,7 @@ public class TestRendererCharacter extends Renderer {
 
 		human = new Character(0, 0, 64, 64);
 
-		stage.addActor(human);
+		scene.addActor(human);
 
 	}
 
@@ -51,7 +51,7 @@ public class TestRendererCharacter extends Renderer {
 		// // // human.draw(batch);
 		// batch.end();
 
-		stage.draw();
+		scene.draw();
 		// stage.act();
 
 		if (Gdx.input.isTouched()) {

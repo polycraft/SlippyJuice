@@ -12,10 +12,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.polycraft.slippyjuice.renderers.Renderer;
+import com.polycraft.slippyjuice.scene.Scene;
 
 public class TestRenderer extends Renderer {
+	protected Scene scene;
 
 	private static final int FRAME_COLS = 4;
 	private static final int FRAME_ROWS = 8;
@@ -41,7 +42,7 @@ public class TestRenderer extends Renderer {
 		camera.update();
 
 		batch = new SpriteBatch();
-		stage = new Stage(width, height, true, batch);
+		scene = new Scene(width, height, true, batch);
 		// Gdx.input.setInputProcessor(stage);
 
 		walkSheet = new Texture(Gdx.files.internal("data/skin.png")); // #9

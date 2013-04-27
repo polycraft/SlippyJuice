@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.polycraft.slippyjuice.ui.HUD;
 
 public class MainMenuRenderer extends Renderer {
 	private Skin skinUI;
@@ -19,16 +19,16 @@ public class MainMenuRenderer extends Renderer {
 
 		camera = new OrthographicCamera(width, height);
 		batch = new SpriteBatch();
-		stage = new Stage(width, height, true, batch);
-		Gdx.input.setInputProcessor(stage);
+		hud = new HUD(width, height, true, batch);
+		Gdx.input.setInputProcessor(hud);
 
 		skinUI = new Skin(Gdx.files.internal("data/ui/uiskin.json"));
 		testText = new Label("Main menu", skinUI);
 		testText.setPosition(Gdx.graphics.getWidth() / 2 - testText.getWidth()
 				/ 2, Gdx.graphics.getHeight() - 20);
 		TextButton button = new TextButton("Test", skinUI);
-		stage.addActor(button);
-		stage.addActor(this.testText);
+		hud.addActor(button);
+		hud.addActor(this.testText);
 
 	}
 
@@ -39,8 +39,8 @@ public class MainMenuRenderer extends Renderer {
 		// actualise le background
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		stage.draw();
+		hud.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		hud.draw();
 
 	}
 

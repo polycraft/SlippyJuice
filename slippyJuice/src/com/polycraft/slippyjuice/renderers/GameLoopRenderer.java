@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.polycraft.slippyjuice.scene.Scene;
 
 public class GameLoopRenderer extends Renderer {
 
@@ -14,8 +14,8 @@ public class GameLoopRenderer extends Renderer {
 
 		camera = new OrthographicCamera(width, height);
 		batch = new SpriteBatch();
-		stage = new Stage(width, height, true, batch);
-		Gdx.input.setInputProcessor(stage);
+		scene = new Scene(width, height, true, batch);
+		Gdx.input.setInputProcessor(scene);
 	}
 
 	@Override
