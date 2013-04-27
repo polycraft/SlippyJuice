@@ -10,13 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.polycraft.slippyjuice.renderers.Renderer;
-import com.polycraft.slippyjuice.scene.character.Human;
+import com.polycraft.slippyjuice.scene.character.Character;
 
-public class TestRendererTech2 extends Renderer {
+public class TestRendererCharacter extends Renderer {
 
-	Human human;
+	Character human;
 
-	public TestRendererTech2() {
+	public TestRendererCharacter() {
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
@@ -32,7 +32,7 @@ public class TestRendererTech2 extends Renderer {
 		AssetManager manager = new AssetManager();
 		manager.load("data/body.png", Texture.class);
 
-		human = new Human(0, 0, 64, 64);
+		human = new Character(0, 0, 64, 64);
 
 		stage.addActor(human);
 
