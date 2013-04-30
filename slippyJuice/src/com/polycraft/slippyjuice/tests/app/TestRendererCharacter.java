@@ -11,6 +11,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.polycraft.slippyjuice.renderers.Renderer;
 import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.scene.character.Character;
+import com.polycraft.slippyjuice.stuff.Caracteristics;
+import com.polycraft.slippyjuice.stuff.EquipmentStuff;
+import com.polycraft.slippyjuice.stuff.EquipmentType;
 
 public class TestRendererCharacter extends Renderer {
 
@@ -35,6 +38,15 @@ public class TestRendererCharacter extends Renderer {
 		human = new Character(0, 0, 64, 64);
 
 		scene.addActor(human);
+
+		// human.getHead().addFeature(
+		// new Feature("cheveux test", FeatureType.HAIR, new Texture(
+		// Gdx.files.internal("data/features/hair1.png"))));
+		EquipmentStuff equip1 = new EquipmentStuff(new Texture(
+				Gdx.files.internal("data/equipments/mask1.png")),
+				"Armure de bois", "blabla", 31, 5, EquipmentType.ARMOR,
+				Caracteristics.RESISTANCE, 21);
+		human.getHead().addEquipmentStuff(equip1);
 
 	}
 
@@ -64,10 +76,10 @@ public class TestRendererCharacter extends Renderer {
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-			human.rotateLeftArm(2);
+			human.rotateRightArm(2);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-			human.rotateLeftArm(-2);
+			human.rotateRightArm(-2);
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {

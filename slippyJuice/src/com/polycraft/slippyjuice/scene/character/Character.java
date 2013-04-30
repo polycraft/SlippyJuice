@@ -103,12 +103,12 @@ public class Character extends Group {
 
 	}
 
-	private Body body;
-	private Arm leftArm;
-	private Arm rightArm;
-	private Leg leftLeg;
-	private Leg rightLeg;
-	private Head head;
+	private BodyPart body;
+	private BodyPart leftArm;
+	private BodyPart rightArm;
+	private BodyPart leftLeg;
+	private BodyPart rightLeg;
+	private BodyPart head;
 
 	public Character(float x, float y, float width, float height) {
 		super();
@@ -122,30 +122,34 @@ public class Character extends Group {
 		// Du plus éloigné au plus proche
 
 		// - Left Arm
-		leftArm = new Arm(new Texture(Gdx.files.internal("data/right_arm.png")));
+
+		leftArm = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
 		this.addActor(leftArm);
 
 		// - Left Leg
-		leftLeg = new Leg(new Texture(Gdx.files.internal("data/right_leg.png")));
+		leftLeg = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
 		this.addActor(leftLeg);
 
 		// - Body
-		body = new Body(new Texture(Gdx.files.internal("data/body.png")));
-		body.setTransform(true);
+		body = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/body.png")), 0, 0);
 		this.addActor(body);
 
 		// - Head
-		head = new Head(new Texture(Gdx.files.internal("data/head.png")));
+		head = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/head.png")), 0, 20);
 		this.addActor(head);
 
 		// - Right Leg
-		rightLeg = new Leg(
-				new Texture(Gdx.files.internal("data/right_leg.png")));
+		rightLeg = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
 		this.addActor(rightLeg);
 
 		// - Right Arm
-		rightArm = new Arm(
-				new Texture(Gdx.files.internal("data/right_arm.png")));
+		rightArm = new BodyPart(new Texture(
+				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
 		this.addActor(rightArm);
 
 	}
@@ -179,27 +183,27 @@ public class Character extends Group {
 		head.rotate(degrees);
 	}
 
-	public Body getBody() {
+	public BodyPart getBody() {
 		return body;
 	}
 
-	public Arm getLeftArm() {
+	public BodyPart getLeftArm() {
 		return leftArm;
 	}
 
-	public Arm getRightArm() {
+	public BodyPart getRightArm() {
 		return rightArm;
 	}
 
-	public Leg getLeftLeg() {
+	public BodyPart getLeftLeg() {
 		return leftLeg;
 	}
 
-	public Leg getRightLeg() {
+	public BodyPart getRightLeg() {
 		return rightLeg;
 	}
 
-	public Head getHead() {
+	public BodyPart getHead() {
 		return head;
 	}
 
