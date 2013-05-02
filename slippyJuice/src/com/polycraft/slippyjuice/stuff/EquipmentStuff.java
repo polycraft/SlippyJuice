@@ -1,13 +1,25 @@
 package com.polycraft.slippyjuice.stuff;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.polycraft.slippyjuice.scene.character.BodyPartType;
 
 public class EquipmentStuff extends Stuff {
 	private EquipmentType equipmentType;
 	private Boolean equiped;
-	private Sprite sprite;
+	private Map<BodyPartType, Sprite> spritesParts;
+
+	public EquipmentStuff(Texture texture, String name, String definition,
+			Integer price, Integer rarity, EquipmentType equipmentType,
+			Caracteristics caractAffected, Integer value,
+			Map<BodyPartType, Sprite> spritesParts) {
+		this(texture, name, definition, price, rarity, equipmentType);
+		this.addEffect(caractAffected, value);
+		setSpritesParts(spritesParts);
+	}
 
 	public EquipmentStuff(Texture texture, String name, String definition,
 			Integer price, Integer rarity, EquipmentType equipmentType,
@@ -18,10 +30,10 @@ public class EquipmentStuff extends Stuff {
 
 	public EquipmentStuff(Texture texture, String name, String definition,
 			Integer price, Integer rarity, EquipmentType equipmentType) {
-		super(name, definition, price, rarity);
-		this.sprite = new Sprite(texture);
+		super(texture, name, definition, price, rarity);
 		this.equipmentType = equipmentType;
 		this.equiped = false;
+		this.spritesParts = new HashMap<BodyPartType, Sprite>();
 	}
 
 	public EquipmentType getEquipmentType() {
@@ -36,17 +48,17 @@ public class EquipmentStuff extends Stuff {
 		return equiped;
 	}
 
-	public void draw(SpriteBatch batch, float parentAlpha) {
-		sprite.draw(batch, parentAlpha);
+	public Map<BodyPartType, Sprite> getSpritesParts() {
+		return spritesParts;
+	}
+
+	public void setSpritesParts(Map<BodyPartType, Sprite> spritesParts) {
+		this.spritesParts = spritesParts;
 	}
 
 	public String toString() {
 		return "Equipment stuff:" + equipmentType + " : " + super.toString()
 				+ " ::" + equiped + "\n";
-	}
-
-	public Sprite getSprite() {
-		return sprite;
 	}
 
 }

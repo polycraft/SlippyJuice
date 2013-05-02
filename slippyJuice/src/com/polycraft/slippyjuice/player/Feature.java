@@ -1,15 +1,18 @@
-package com.polycraft.slippyjuice.scene.character;
+package com.polycraft.slippyjuice.player;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.polycraft.slippyjuice.scene.character.BodyPartType;
 
 public class Feature {
+	private int id;
 	private String name;
-	private FeatureType type;
+	private BodyPartType type;
 	private Sprite sprite;
 
-	public Feature(String name, FeatureType type, Texture texture) {
+	public Feature(int id, String name, BodyPartType type, Texture texture) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.sprite = new Sprite(texture);
@@ -19,7 +22,7 @@ public class Feature {
 		return name;
 	}
 
-	public FeatureType getType() {
+	public BodyPartType getType() {
 		return type;
 	}
 

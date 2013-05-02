@@ -25,8 +25,9 @@ public class TestPlayer {
 				"TTTT", 2000, 1, EquipmentType.ARMOR, Caracteristics.SPEED, 100);
 
 		// creeer d'un item
-		ItemStuff item1 = (ItemStuff) new ItemStuff("item1", "blazdbla", 31, 5,
-				Caracteristics.SPEED, 21).addEffect(Caracteristics.HEALTH, 500);
+		ItemStuff item1 = (ItemStuff) new ItemStuff(null, "item1", "blazdbla",
+				31, 5, Caracteristics.SPEED, 21).addEffect(
+				Caracteristics.HEALTH, 500);
 
 		// un joueur
 		PlayerInformation playerInformation = new PlayerInformation("Bob", 10,

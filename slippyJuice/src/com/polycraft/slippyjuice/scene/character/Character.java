@@ -1,107 +1,19 @@
 package com.polycraft.slippyjuice.scene.character;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.polycraft.slippyjuice.player.Feature;
+import com.polycraft.slippyjuice.stuff.EquipmentStuff;
+import com.polycraft.slippyjuice.stuff.EquipmentType;
+import com.polycraft.slippyjuice.stuff.Stuff;
 
 public class Character extends Group {
-
-	public class Body extends Group {
-
-		Sprite sprite;
-
-		public Body(Texture texture) {
-			super();
-			sprite = new Sprite(texture);
-			setOrigin(0, 0);
-			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2);
-		}
-
-		@Override
-		public void draw(SpriteBatch batch, float parentAlpha) {
-			sprite.setOrigin(getOriginX(), getOriginY());
-			sprite.setPosition(getX(), getY());
-			sprite.setRotation(getRotation());
-			sprite.setSize(getWidth(), getHeight());
-			sprite.draw(batch);
-			super.draw(batch, parentAlpha);
-		}
-	}
-
-	public class Arm extends Group {
-		Sprite sprite;
-
-		public Arm(Texture texture) {
-			super();
-			sprite = new Sprite(texture);
-			setOrigin(texture.getWidth() / 2, texture.getHeight());
-			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2 - 15);
-		}
-
-		@Override
-		public void draw(SpriteBatch batch, float parentAlpha) {
-			sprite.setOrigin(getOriginX(), getOriginY());
-			sprite.setPosition(getX(), getY());
-			sprite.setRotation(getRotation());
-			sprite.setSize(getWidth(), getHeight());
-			sprite.draw(batch);
-			super.draw(batch, parentAlpha);
-		}
-	}
-
-	public class Leg extends Group {
-		Sprite sprite;
-
-		public Leg(Texture texture) {
-			super();
-			sprite = new Sprite(texture);
-			setOrigin(texture.getWidth() / 2, texture.getHeight());
-			setSize(texture.getWidth(), texture.getHeight());
-			// setPosition(-3, -45);
-			setPosition(-texture.getWidth() / 2 - 3,
-					-texture.getHeight() / 2 - 45);
-		}
-
-		@Override
-		public void draw(SpriteBatch batch, float parentAlpha) {
-			sprite.setOrigin(getOriginX(), getOriginY());
-			sprite.setPosition(getX(), getY());
-			sprite.setRotation(getRotation());
-			sprite.setSize(getWidth(), getHeight());
-			sprite.draw(batch);
-			super.draw(batch, parentAlpha);
-		}
-
-	}
-
-	public class Head extends Group {
-		Sprite sprite;
-
-		public Head(Texture texture) {
-			super();
-			sprite = new Sprite(texture);
-			setOrigin(texture.getWidth() / 2, texture.getHeight());
-			setSize(texture.getWidth(), texture.getHeight());
-			setPosition(-texture.getWidth() / 2, -texture.getHeight() / 2 - 15);
-			setRotation(180);
-
-		}
-
-		@Override
-		public void draw(SpriteBatch batch, float parentAlpha) {
-			sprite.setOrigin(getOriginX(), getOriginY());
-			sprite.setPosition(getX(), getY());
-			sprite.setRotation(getRotation());
-			sprite.setSize(getWidth(), getHeight());
-			sprite.draw(batch);
-			super.draw(batch, parentAlpha);
-		}
-
-	}
 
 	private BodyPart body;
 	private BodyPart leftArm;
@@ -109,6 +21,7 @@ public class Character extends Group {
 	private BodyPart leftLeg;
 	private BodyPart rightLeg;
 	private BodyPart head;
+	private Map<BodyPartType, BodyPart> bodyParts;
 
 	public Character(float x, float y, float width, float height) {
 		super();
@@ -119,37 +32,44 @@ public class Character extends Group {
 	}
 
 	protected void buildCharacter() {
+		bodyParts = new HashMap<BodyPartType, BodyPart>();
+
 		// Du plus éloigné au plus proche
 
 		// - Left Arm
-
 		leftArm = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
+		bodyParts.put(BodyPartType.LEFT_ARM, leftArm);
 		this.addActor(leftArm);
 
 		// - Left Leg
 		leftLeg = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
+		bodyParts.put(BodyPartType.LEFT_LEG, leftLeg);
 		this.addActor(leftLeg);
 
 		// - Body
 		body = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/body.png")), 0, 0);
+		bodyParts.put(BodyPartType.BODY, body);
 		this.addActor(body);
 
 		// - Head
 		head = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/head.png")), 0, 20);
+		bodyParts.put(BodyPartType.HEAD, head);
 		this.addActor(head);
 
 		// - Right Leg
 		rightLeg = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
+		bodyParts.put(BodyPartType.RIGHT_LEG, rightLeg);
 		this.addActor(rightLeg);
 
 		// - Right Arm
 		rightArm = new BodyPart(new Texture(
 				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
+		bodyParts.put(BodyPartType.RIGHT_ARM, rightArm);
 		this.addActor(rightArm);
 
 	}
@@ -157,6 +77,34 @@ public class Character extends Group {
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
+	}
+
+	public void setInventory(Map<EquipmentType, Stuff> inventory) {
+		// all inventorys
+		for (EquipmentType type : inventory.keySet()) {
+
+			EquipmentStuff equipmentStuff = (EquipmentStuff) inventory
+					.get(type);
+			// all spriteParts of this equipment
+			for (BodyPartType bodyPartType : equipmentStuff.getSpritesParts()
+					.keySet()) {
+				// if this part exist
+				if (this.bodyParts.containsKey(bodyPartType)) {
+					bodyParts.get(bodyPartType).addDecal(
+							equipmentStuff.getSpritesParts().get(bodyPartType));
+				}
+
+			}
+		}
+	}
+
+	public void setFeatures(List<Feature> features) {
+		for (Feature feature : features) {
+			if (this.bodyParts.containsKey(feature.getType())) {
+				this.bodyParts.get(feature.getType()).addDecal(
+						feature.getSprite());
+			}
+		}
 	}
 
 	public void rotateBody(float degrees) {

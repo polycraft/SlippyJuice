@@ -3,20 +3,26 @@ package com.polycraft.slippyjuice.stuff;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
 public class Stuff {
 	protected Integer price;
 	protected Integer rarity;
 	protected String name;
 	protected String definition;
 	protected Map<Caracteristics, Integer> effects;
+	protected Sprite sprite;
 
-	public Stuff(String name, String definition, Integer price, Integer rarity) {
+	public Stuff(Texture texture, String name, String definition,
+			Integer price, Integer rarity) {
 		super();
 		this.name = name;
 		this.definition = definition;
 		this.price = price;
 		this.rarity = rarity;
 		this.effects = new HashMap<Caracteristics, Integer>();
+		this.sprite = new Sprite(texture);
 	}
 
 	/**

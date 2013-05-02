@@ -1,6 +1,5 @@
 package com.polycraft.slippyjuice.player;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +57,7 @@ public class Player {
 			holdStuff = this.inventory.put(equipment.getEquipmentType(),
 					equipment);
 		} else {
-			System.out.println("NOT AN EQUIPMENT : " + stuffToEquip);
+			System.out.println("NOT (EQUIPMENT OR IN BAG): " + stuffToEquip);
 		}
 		if (null != holdStuff) {
 			this.stuffs.add(holdStuff);
@@ -125,4 +124,9 @@ public class Player {
 				+ "\n	EQUIPED : \n" + outInventory + "\n	STUFFS : \n"
 				+ outStuffs;
 	}
+
+	public Map<EquipmentType, Stuff> getInventory() {
+		return inventory;
+	}
+
 }

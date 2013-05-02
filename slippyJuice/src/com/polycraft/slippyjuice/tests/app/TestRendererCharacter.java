@@ -1,19 +1,27 @@
 package com.polycraft.slippyjuice.tests.app;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.polycraft.slippyjuice.player.Player;
+import com.polycraft.slippyjuice.player.PlayerInformation;
 import com.polycraft.slippyjuice.renderers.Renderer;
 import com.polycraft.slippyjuice.scene.Scene;
+import com.polycraft.slippyjuice.scene.character.BodyPartType;
 import com.polycraft.slippyjuice.scene.character.Character;
 import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
+import com.polycraft.slippyjuice.stuff.Stuff;
 
 public class TestRendererCharacter extends Renderer {
 
@@ -39,14 +47,45 @@ public class TestRendererCharacter extends Renderer {
 
 		scene.addActor(human);
 
-		// human.getHead().addFeature(
-		// new Feature("cheveux test", FeatureType.HAIR, new Texture(
-		// Gdx.files.internal("data/features/hair1.png"))));
-		EquipmentStuff equip1 = new EquipmentStuff(new Texture(
-				Gdx.files.internal("data/equipments/mask1.png")),
-				"Armure de bois", "blabla", 31, 5, EquipmentType.ARMOR,
-				Caracteristics.RESISTANCE, 21);
-		human.getHead().addEquipmentStuff(equip1);
+		// un joueur
+		PlayerInformation playerInformation = new PlayerInformation("Bob", 10,
+				1);
+		Player player = new Player(playerInformation);
+
+		// equipment
+		EquipmentStuff equip1 = new EquipmentStuff(null, "Masque", "blabla",
+				31, 5, EquipmentType.HELMET, Caracteristics.RESISTANCE, 21);
+
+		Texture texture = new Texture(
+				Gdx.files.internal("data/equipments/mask1.png"));
+		Map<BodyPartType, Sprite> spriteParts = new HashMap<BodyPartType, Sprite>();
+		spriteParts.put(BodyPartType.HEAD, new Sprite(texture));
+
+		equip1.setSpritesParts(spriteParts);
+
+		// spiderman armure test
+		Map<BodyPartType, Sprite> spritePartsSpiderMan = new HashMap<BodyPartType, Sprite>();
+		spritePartsSpiderMan.put(BodyPartType.BODY, new Sprite(new Texture(
+				Gdx.files.internal("data/equipments/armor1_body.png"))));
+		spritePartsSpiderMan.put(
+				BodyPartType.RIGHT_ARM,
+				new Sprite(new Texture(Gdx.files
+						.internal("data/equipments/armor1_arm.png"))));
+
+		EquipmentStuff equip2 = new EquipmentStuff(null, "Haut SpiderMan",
+				"blabla", 31, 5, EquipmentType.ARMOR,
+				Caracteristics.RESISTANCE, 21, spritePartsSpiderMan);
+
+		// inventory
+		Map<EquipmentType, Stuff> inventory = new HashMap<EquipmentType, Stuff>();
+
+		inventory.put(equip1.getEquipmentType(), equip1);
+		inventory.put(equip2.getEquipmentType(), equip2);
+
+		// player.addStuff(equip1);
+		// player.equip(equip1);
+
+		human.setInventory(inventory);
 
 	}
 
