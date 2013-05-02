@@ -22,7 +22,11 @@ public class Stuff {
 		this.price = price;
 		this.rarity = rarity;
 		this.effects = new HashMap<Caracteristics, Integer>();
+		if (texture == null) {
+			texture = new Texture("data/textures/default.png");
+		}
 		this.sprite = new Sprite(texture);
+
 	}
 
 	/**

@@ -38,37 +38,37 @@ public class Character extends Group {
 
 		// - Left Arm
 		leftArm = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
+				Gdx.files.internal("data/textures/skin/right_arm.png")), 0, 15);
 		bodyParts.put(BodyPartType.LEFT_ARM, leftArm);
 		this.addActor(leftArm);
 
 		// - Left Leg
 		leftLeg = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
+				Gdx.files.internal("data/textures/skin/right_leg.png")), 0, -16);
 		bodyParts.put(BodyPartType.LEFT_LEG, leftLeg);
 		this.addActor(leftLeg);
 
 		// - Body
 		body = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/body.png")), 0, 0);
+				Gdx.files.internal("data/textures/skin/body.png")), 0, 0);
 		bodyParts.put(BodyPartType.BODY, body);
 		this.addActor(body);
 
 		// - Head
 		head = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/head.png")), 0, 20);
+				Gdx.files.internal("data/textures/skin/head.png")), 0, 20);
 		bodyParts.put(BodyPartType.HEAD, head);
 		this.addActor(head);
 
 		// - Right Leg
 		rightLeg = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/right_leg.png")), 0, -16);
+				Gdx.files.internal("data/textures/skin/right_leg.png")), 0, -16);
 		bodyParts.put(BodyPartType.RIGHT_LEG, rightLeg);
 		this.addActor(rightLeg);
 
 		// - Right Arm
 		rightArm = new BodyPart(new Texture(
-				Gdx.files.internal("data/skin/right_arm.png")), 0, 15);
+				Gdx.files.internal("data/textures/skin/right_arm.png")), 0, 15);
 		bodyParts.put(BodyPartType.RIGHT_ARM, rightArm);
 		this.addActor(rightArm);
 

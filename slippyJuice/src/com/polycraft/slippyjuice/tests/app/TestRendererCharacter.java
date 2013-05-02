@@ -57,7 +57,7 @@ public class TestRendererCharacter extends Renderer {
 				31, 5, EquipmentType.HELMET, Caracteristics.RESISTANCE, 21);
 
 		Texture texture = new Texture(
-				Gdx.files.internal("data/equipments/mask1.png"));
+				Gdx.files.internal("data/textures/equipments/mask1.png"));
 		Map<BodyPartType, Sprite> spriteParts = new HashMap<BodyPartType, Sprite>();
 		spriteParts.put(BodyPartType.HEAD, new Sprite(texture));
 
@@ -65,12 +65,16 @@ public class TestRendererCharacter extends Renderer {
 
 		// spiderman armure test
 		Map<BodyPartType, Sprite> spritePartsSpiderMan = new HashMap<BodyPartType, Sprite>();
-		spritePartsSpiderMan.put(BodyPartType.BODY, new Sprite(new Texture(
-				Gdx.files.internal("data/equipments/armor1_body.png"))));
+		spritePartsSpiderMan
+				.put(BodyPartType.BODY,
+						new Sprite(
+								new Texture(
+										Gdx.files
+												.internal("data/textures/equipments/armor1_body.png"))));
 		spritePartsSpiderMan.put(
 				BodyPartType.RIGHT_ARM,
 				new Sprite(new Texture(Gdx.files
-						.internal("data/equipments/armor1_arm.png"))));
+						.internal("data/textures/equipments/armor1_arm.png"))));
 
 		EquipmentStuff equip2 = new EquipmentStuff(null, "Haut SpiderMan",
 				"blabla", 31, 5, EquipmentType.ARMOR,
