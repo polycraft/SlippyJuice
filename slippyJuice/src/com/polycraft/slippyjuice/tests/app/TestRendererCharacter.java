@@ -1,6 +1,8 @@
 package com.polycraft.slippyjuice.tests.app;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.polycraft.slippyjuice.player.Feature;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
 import com.polycraft.slippyjuice.renderers.Renderer;
@@ -83,14 +86,22 @@ public class TestRendererCharacter extends Renderer {
 		// inventory
 		Map<EquipmentType, Stuff> inventory = new HashMap<EquipmentType, Stuff>();
 
-		inventory.put(equip1.getEquipmentType(), equip1);
+		// inventory.put(equip1.getEquipmentType(), equip1);
 		inventory.put(equip2.getEquipmentType(), equip2);
 
 		// player.addStuff(equip1);
 		// player.equip(equip1);
 
+		Feature featureTest = new Feature(0, "test", BodyPartType.HEAD,
+				new Texture(
+						Gdx.files.internal("data/textures/features/hair1.png")));
+		List<Feature> features = new ArrayList<Feature>();
+		features.add(featureTest);
+
+		human.setFeatures(features);
 		human.setInventory(inventory);
 
+		human.setSkinColor(0, 0.5f, 1, 1);
 	}
 
 	@Override

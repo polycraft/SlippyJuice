@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -74,6 +75,18 @@ public class Character extends Group {
 
 	}
 
+	public void setSkinColor(Color color) {
+		for (BodyPartType partType : bodyParts.keySet()) {
+			bodyParts.get(partType).setColor(color);
+		}
+	}
+
+	public void setSkinColor(float r, float g, float b, float alpha) {
+		for (BodyPartType partType : bodyParts.keySet()) {
+			bodyParts.get(partType).setColor(r, g, b, alpha);
+		}
+	}
+
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		super.draw(batch, parentAlpha);
@@ -93,15 +106,14 @@ public class Character extends Group {
 					bodyParts.get(bodyPartType).addDecal(
 							equipmentStuff.getSpritesParts().get(bodyPartType));
 				}
-
 			}
 		}
 	}
 
 	public void setFeatures(List<Feature> features) {
 		for (Feature feature : features) {
-			if (this.bodyParts.containsKey(feature.getType())) {
-				this.bodyParts.get(feature.getType()).addDecal(
+			if (this.bodyParts.containsKey(feature.getType().bodyPart())) {
+				this.bodyParts.get(feature.getType().bodyPart()).addDecal(
 						feature.getSprite());
 			}
 		}

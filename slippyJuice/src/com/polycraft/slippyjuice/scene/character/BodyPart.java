@@ -34,6 +34,7 @@ public class BodyPart extends Group {
 		skin.setPosition(getX(), getY());
 		skin.setRotation(getRotation());
 		skin.setSize(getWidth(), getHeight());
+		skin.setColor(this.getColor());
 		skin.draw(batch, parentAlpha);
 	}
 
