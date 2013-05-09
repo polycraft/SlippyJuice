@@ -1,16 +1,19 @@
 package com.polycraft.slippyjuice.tests.app;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.polycraft.slippyjuice.renderers.Renderer;
 
 public class TestScreen implements Screen {
 	protected TestGame game;
 	protected Renderer renderer;
 
-	public TestScreen(TestGame testGame) {
+	public TestScreen(TestGame testGame, AssetManager assetManager) {
+		super();
 		// renderer = new TestRenderer();
-		renderer = new TestRendererCharacter();
+		renderer = new TestRenderer(assetManager);
 		this.game = testGame;
+
 	}
 
 	@Override

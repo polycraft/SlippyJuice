@@ -10,7 +10,8 @@ public abstract class SlippyJuiceScreen implements Screen {
 	protected Renderer renderer;
 	protected AssetManager assetManager;
 
-	public SlippyJuiceScreen(SlippyJuice game) {
+	public SlippyJuiceScreen(SlippyJuice game, AssetManager assetManager) {
 		this.game = game;
+		this.assetManager = assetManager;
 	}
 }

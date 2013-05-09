@@ -1,21 +1,22 @@
 package com.polycraft.slippyjuice.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.polycraft.slippyjuice.SlippyJuice;
 import com.polycraft.slippyjuice.renderers.GameLoopRenderer;
 
 public class GameLoopScreen extends SlippyJuiceScreen {
 
-	public GameLoopScreen(SlippyJuice game) {
-		super(game);
-		renderer = new GameLoopRenderer();
+	public GameLoopScreen(SlippyJuice game, AssetManager assetManager) {
+		super(game, assetManager);
+		renderer = new GameLoopRenderer(assetManager);
 	}
 
 	@Override
 	public void render(float delta) {
 		renderer.render(delta);
 		if (Gdx.input.justTouched())
-			game.setMainMenuScreen(); // test switching screens
+			game.setLoading("menu"); // test switching screens
 	}
 
 	@Override

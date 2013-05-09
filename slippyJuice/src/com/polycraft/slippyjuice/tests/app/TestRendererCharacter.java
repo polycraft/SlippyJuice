@@ -21,6 +21,7 @@ import com.polycraft.slippyjuice.renderers.Renderer;
 import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.scene.character.BodyPartType;
 import com.polycraft.slippyjuice.scene.character.Character;
+import com.polycraft.slippyjuice.simulation.GameLoopEngine;
 import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
@@ -29,8 +30,11 @@ import com.polycraft.slippyjuice.stuff.Stuff;
 public class TestRendererCharacter extends Renderer {
 
 	Character human;
+	GameLoopEngine gameLoopEngine;
 
-	public TestRendererCharacter() {
+	public TestRendererCharacter(AssetManager assetManager) {
+
+		super(assetManager);
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
@@ -46,7 +50,7 @@ public class TestRendererCharacter extends Renderer {
 		AssetManager manager = new AssetManager();
 		manager.load("data/body.png", Texture.class);
 
-		human = new Character(0, 0, 64, 64);
+		human = new Character(assetManager, 0, 0, 64, 64);
 
 		scene.addActor(human);
 
@@ -102,10 +106,13 @@ public class TestRendererCharacter extends Renderer {
 		human.setInventory(inventory);
 
 		human.setSkinColor(0, 0.5f, 1, 1);
+
+		gameLoopEngine = new GameLoopEngine(player, scene);
 	}
 
 	@Override
 	public void render(float delta) {
+		gameLoopEngine.update(delta);
 		// init the background color
 		Gdx.gl.glClearColor(2, 2, 2, 2);
 		// actualise le background

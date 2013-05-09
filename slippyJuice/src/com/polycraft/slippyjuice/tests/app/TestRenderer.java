@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,7 +34,8 @@ public class TestRenderer extends Renderer {
 
 	float stateTime;
 
-	public TestRenderer() {
+	public TestRenderer(AssetManager assetManager) {
+		super(assetManager);
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 

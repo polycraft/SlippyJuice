@@ -1,6 +1,7 @@
 package com.polycraft.slippyjuice.renderers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,7 +14,8 @@ public class MainMenuRenderer extends Renderer {
 	private Skin skinUI;
 	private Label testText;
 
-	public MainMenuRenderer() {
+	public MainMenuRenderer(AssetManager assetManager) {
+		super(assetManager);
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 
@@ -22,7 +24,7 @@ public class MainMenuRenderer extends Renderer {
 		hud = new HUD(width, height, true, batch);
 		Gdx.input.setInputProcessor(hud);
 
-		skinUI = new Skin(Gdx.files.internal("data/ui/uiskin.json"));
+		skinUI = assetManager.get("data/ui/uiskin.json", Skin.class);
 		testText = new Label("Main menu", skinUI);
 		testText.setPosition(Gdx.graphics.getWidth() / 2 - testText.getWidth()
 				/ 2, Gdx.graphics.getHeight() - 20);

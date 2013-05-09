@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.polycraft.slippyjuice.scene.character.Character;
 import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
@@ -16,6 +17,7 @@ public class Player {
 	private List<Stuff> stuffs;
 	private Map<EquipmentType, Stuff> inventory;
 	private Map<Caracteristics, Float> properties;
+	private Character character;
 
 	public Player(PlayerInformation information) {
 		this(information, new Float(100), new Float(100), new Float(0),
@@ -127,6 +129,18 @@ public class Player {
 
 	public Map<EquipmentType, Stuff> getInventory() {
 		return inventory;
+	}
+
+	public Float getPropertie(Caracteristics caracteristic) {
+		return this.properties.get(caracteristic);
+	}
+
+	public Character getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(Character character) {
+		this.character = character;
 	}
 
 }
