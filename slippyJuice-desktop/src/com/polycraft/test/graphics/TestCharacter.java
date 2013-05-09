@@ -1,9 +1,10 @@
-package com.polycraft.slippyjuice;
+package com.polycraft.test.graphics;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.polycraft.slippyjuice.tests.app.TestGame;
 
-public class SlippyJuiceMain {
+public class TestCharacter {
 	public static void main(String[] args) {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "slippyJuice";
@@ -11,6 +12,7 @@ public class SlippyJuiceMain {
 		cfg.width = 800;
 		cfg.height = 600;
 
-		new LwjglApplication(new SlippyJuice(), cfg);
+		new LwjglApplication(new TestGame(), cfg);
+
 	}
 }
