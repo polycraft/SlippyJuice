@@ -14,6 +14,7 @@ public class SlippyJuiceAssets {
 	public static void loadMenuAssets(AssetManager manager) {
 		manager.clear();
 		manager.load("data/ui/uiskin.json", Skin.class);
+		manager.load("data/slippyjuice.png", Texture.class);
 	}
 
 	public static void loadGameAssets(AssetManager manager) {

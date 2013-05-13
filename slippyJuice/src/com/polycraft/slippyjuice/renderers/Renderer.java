@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.polycraft.slippyjuice.scene.Scene;
+import com.polycraft.slippyjuice.simulation.GameLoopEngine;
 import com.polycraft.slippyjuice.ui.HUD;
 
 public abstract class Renderer {
@@ -17,6 +18,13 @@ public abstract class Renderer {
 		this.assetManager = assetManager;
 	}
 
-	public abstract void render(float delta);
+	public void render(float delta) {
+
+	}
+
+	public void render(float deltaTime, GameLoopEngine gameLoopEngine) {
+		// TODO Auto-generated method stub
+
+	}
 
 }

@@ -23,9 +23,11 @@ public class Stuff {
 		this.rarity = rarity;
 		this.effects = new HashMap<Caracteristics, Integer>();
 		if (texture == null) {
-			texture = new Texture("data/textures/default.png");
+			// this.sprite = new Sprite(new Texture(
+			// Gdx.files.internal("data/textures/default.png")));
+		} else {
+			this.sprite = new Sprite(texture);
 		}
-		this.sprite = new Sprite(texture);
 
 	}
 

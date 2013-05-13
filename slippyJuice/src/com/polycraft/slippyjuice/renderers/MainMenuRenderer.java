@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,6 +15,7 @@ import com.polycraft.slippyjuice.ui.HUD;
 public class MainMenuRenderer extends Renderer {
 	private Skin skinUI;
 	private Label testText;
+	private Sprite titleSprite;
 
 	public MainMenuRenderer(AssetManager assetManager) {
 		super(assetManager);
@@ -21,7 +24,7 @@ public class MainMenuRenderer extends Renderer {
 
 		camera = new OrthographicCamera(width, height);
 		batch = new SpriteBatch();
-		hud = new HUD(width, height, true, batch);
+		hud = new HUD(assetManager, width, height, true, batch);
 		Gdx.input.setInputProcessor(hud);
 
 		skinUI = assetManager.get("data/ui/uiskin.json", Skin.class);
@@ -32,18 +35,25 @@ public class MainMenuRenderer extends Renderer {
 		hud.addActor(button);
 		hud.addActor(this.testText);
 
+		titleSprite = new Sprite(assetManager.get("data/slippyjuice.png",
+				Texture.class));
+		titleSprite.setPosition(0, 250);
+		titleSprite.setSize(width, titleSprite.getHeight());
+
 	}
 
-	@Override
 	public void render(float delta) {
 		// init the background color
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		// actualise le background
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
+		batch.begin();
+		titleSprite.draw(batch);
+		batch.end();
+
 		hud.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
 		hud.draw();
 
 	}
-
 }

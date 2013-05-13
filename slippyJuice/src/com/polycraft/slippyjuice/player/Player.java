@@ -20,8 +20,7 @@ public class Player {
 	private Character character;
 
 	public Player(PlayerInformation information) {
-		this(information, new Float(100), new Float(100), new Float(0),
-				new Float(1), new Float(1), new Float(1));
+		this(information, new Float(0), new Float(2), new Float(1));
 	}
 
 	public Player(PlayerInformation information, Float speed, Float weight,

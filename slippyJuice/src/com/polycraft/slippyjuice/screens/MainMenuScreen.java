@@ -1,6 +1,7 @@
 package com.polycraft.slippyjuice.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.polycraft.slippyjuice.SlippyJuice;
 import com.polycraft.slippyjuice.renderers.MainMenuRenderer;
@@ -14,7 +15,7 @@ public class MainMenuScreen extends SlippyJuiceScreen {
 	@Override
 	public void render(float delta) {
 		renderer.render(delta);
-		if (Gdx.input.justTouched())
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setLoading("game"); // test switching screens
 
 	}
