@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.polycraft.slippyjuice.ui.HUD;
+import com.polycraft.slippyjuice.ui.MainMenuHUD;
 
 public class MainMenuRenderer extends Renderer {
 	private Skin skinUI;
@@ -24,7 +24,7 @@ public class MainMenuRenderer extends Renderer {
 
 		camera = new OrthographicCamera(width, height);
 		batch = new SpriteBatch();
-		hud = new HUD(assetManager, width, height, true, batch);
+		hud = new MainMenuHUD(assetManager, width, height, true, batch);
 		Gdx.input.setInputProcessor(hud);
 
 		skinUI = assetManager.get("data/ui/uiskin.json", Skin.class);

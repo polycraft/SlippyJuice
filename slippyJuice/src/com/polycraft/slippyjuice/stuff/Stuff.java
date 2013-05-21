@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.polycraft.slippyjuice.player.Caracteristics;
 
 public class Stuff {
 	protected Integer price;

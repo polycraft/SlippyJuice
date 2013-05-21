@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.polycraft.slippyjuice.player.Caracteristics;
 import com.polycraft.slippyjuice.scene.character.BodyPartType;
 
 public class EquipmentStuff extends Stuff {

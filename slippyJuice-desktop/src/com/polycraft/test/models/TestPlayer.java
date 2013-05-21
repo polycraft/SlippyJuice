@@ -1,8 +1,8 @@
 package com.polycraft.test.models;
 
+import com.polycraft.slippyjuice.player.Caracteristics;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
-import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
 import com.polycraft.slippyjuice.stuff.ItemStuff;

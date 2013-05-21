@@ -1,6 +1,7 @@
 package com.polycraft.slippyjuice.stuff;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.polycraft.slippyjuice.player.Caracteristics;
 
 public class ItemStuff extends Stuff {
 

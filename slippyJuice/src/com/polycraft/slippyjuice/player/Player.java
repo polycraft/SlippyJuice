@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.polycraft.slippyjuice.scene.character.Character;
-import com.polycraft.slippyjuice.stuff.Caracteristics;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
 import com.polycraft.slippyjuice.stuff.ItemStuff;
@@ -26,16 +25,17 @@ public class Player {
 	public Player(PlayerInformation information, Float speed, Float weight,
 			Float resistance) {
 		this(information, new Float(100), new Float(100), new Float(0), speed,
-				weight, resistance);
+				new Float(0), weight, resistance);
 	}
 
 	public Player(PlayerInformation playerInformation, Float health,
-			Float vomit, Float overJuice, Float speed, Float weight,
-			Float resistance) {
+			Float vomit, Float overJuice, Float speed, Float acceleration,
+			Float weight, Float resistance) {
 		super();
 		this.playerInformation = playerInformation;
 		this.properties = new HashMap<Caracteristics, Float>();
 		this.properties.put(Caracteristics.SPEED, speed);
+		this.properties.put(Caracteristics.ACCELERATION, acceleration);
 		this.properties.put(Caracteristics.HEALTH, health);
 		this.properties.put(Caracteristics.RESISTANCE, resistance);
 		this.properties.put(Caracteristics.WEIGHT, weight);

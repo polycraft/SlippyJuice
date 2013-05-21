@@ -2,8 +2,8 @@ package com.polycraft.slippyjuice.simulation;
 
 import java.text.DecimalFormat;
 
+import com.polycraft.slippyjuice.player.Caracteristics;
 import com.polycraft.slippyjuice.player.Player;
-import com.polycraft.slippyjuice.stuff.Caracteristics;
 
 public class GameLoopEngine {
 	private GameLoopState gameLoopState;
@@ -23,30 +23,36 @@ public class GameLoopEngine {
 	public void update(float deltaTime) {
 		DecimalFormat df = new DecimalFormat("###.##");
 		// force of player to +X, like powers
-		float forceX = 2;
+		float forceX = 0;
 		// ground friction ( depends on the ground's type)
 		float forceFriction = 1f;
 		// player weight
 		float weight = player.getPropertie(Caracteristics.WEIGHT);
 
+		// player acceleration
+		Float playerAcceleration = player
+				.getPropertie(Caracteristics.ACCELERATION);
+		// player speed
+		Float playerSpeed = player.getPropertie(Caracteristics.SPEED);
+
 		// calculate New Acceleration
-		float newAcceleration = (forceX - forceFriction * speed) / weight;
+		float newAcceleration = (forceX - forceFriction * playerSpeed) / weight;
 		// calculate New Speed
-		float newSpeed = speed + newAcceleration * deltaTime;
+		float newSpeed = playerSpeed + newAcceleration * deltaTime;
 		if (newSpeed < LIMIT)
 			newSpeed = 0;
 
 		// Calculate distance
-		float distance = (newSpeed + speed) * deltaTime / 2;
+		float distance = (newSpeed + playerSpeed) * deltaTime / 2;
 
 		System.out.println("Player(" + weight + "g) Acc="
-				+ df.format(acceleration) + " Speed=" + df.format(newSpeed)
+				+ df.format(newAcceleration) + " Speed=" + df.format(newSpeed)
 				+ "m/s Dist=" + distance + "m");
 
 		player.getCharacter().translate(distance * 64, 0);
 		// MAJ Acceleration
-		acceleration = newAcceleration;
+		playerAcceleration = newAcceleration;
 		// MAJ Speed
-		speed = newSpeed;
+		playerSpeed = newSpeed;
 	}
 }

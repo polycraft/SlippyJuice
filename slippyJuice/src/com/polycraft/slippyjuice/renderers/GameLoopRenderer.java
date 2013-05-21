@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.simulation.GameLoopEngine;
-import com.polycraft.slippyjuice.ui.HUD;
+import com.polycraft.slippyjuice.ui.GameLoopHUD;
 
 public class GameLoopRenderer extends Renderer {
 
@@ -21,7 +21,7 @@ public class GameLoopRenderer extends Renderer {
 		batch = new SpriteBatch();
 		scene = new Scene(width, height, true, batch);
 		Gdx.input.setInputProcessor(scene);
-		hud = new HUD(assetManager, width, height, true, batch);
+		hud = new GameLoopHUD(assetManager, width, height, true, batch);
 		Gdx.input.setInputProcessor(hud);
 
 		scene.addActor(player.getCharacter());
