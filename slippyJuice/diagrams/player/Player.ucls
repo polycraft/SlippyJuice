@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <enumeration id="6" language="java" name="com.polycraft.slippyjuice.player.Caracteristics" project="slippyJuice" 
-    file="/slippyJuice/src/com/polycraft/slippyjuice/player/Caracteristics.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="6" language="java" name="com.polycraft.slippyjuice.player.Properties" project="slippyJuice" 
+    file="/slippyJuice/src/com/polycraft/slippyjuice/player/Properties.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="316" y="513"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

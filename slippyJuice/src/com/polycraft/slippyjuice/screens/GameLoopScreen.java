@@ -23,7 +23,7 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 		player.setCharacter(new Character(assetManager, 100, 100, 100, 100));
 
 		renderer = new GameLoopRenderer(assetManager, player);
-		gameLoopEngine = new GameLoopEngine(player);
+		gameLoopEngine = new GameLoopEngine(player, renderer.getScene());
 	}
 
 	@Override

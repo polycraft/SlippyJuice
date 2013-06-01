@@ -27,4 +27,8 @@ public abstract class Renderer {
 
 	}
 
+	public Scene getScene() {
+		return this.scene;
+	}
+
 }

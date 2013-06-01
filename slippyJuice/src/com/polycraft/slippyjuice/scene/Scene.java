@@ -4,35 +4,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class Scene extends Stage {
 
-	private Map<LayerType, Group> layers;
+	private Map<LayerType, Layer> layers;
 
 	public Scene() {
 		super();
-		layers = new HashMap<LayerType, Group>();
+		layers = new HashMap<LayerType, Layer>();
 	}
 
 	public Scene(float width, float height, boolean keepAspectRatio,
 			SpriteBatch batch) {
 		super(width, height, keepAspectRatio, batch);
-		// TODO Auto-generated constructor stub
+		layers = new HashMap<LayerType, Layer>();
 	}
 
 	public Scene(float width, float height, boolean keepAspectRatio) {
 		super(width, height, keepAspectRatio);
-		// TODO Auto-generated constructor stub
+		layers = new HashMap<LayerType, Layer>();
 	}
 
-	public Group getLayer(LayerType layerType) {
+	public void update(Float distance) {
+		for (LayerType layerType : layers.keySet()) {
+			layers.get(layerType).update(distance);
+		}
+	}
+
+	public Layer getLayer(LayerType layerType) {
 		return this.layers.get(layerType);
 	}
 
-	public void setLayer(LayerType layerType, Group group) {
-		this.layers.put(layerType, group);
+	public void setLayer(LayerType layerType, Layer layer) {
+		layer.setZIndex(layerType.zIndex());
+		this.layers.put(layerType, layer);
+		this.addActor(layer);
 	}
 
 }

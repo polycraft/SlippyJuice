@@ -2,38 +2,36 @@ package com.polycraft.slippyjuice.simulation;
 
 import java.text.DecimalFormat;
 
-import com.polycraft.slippyjuice.player.Caracteristics;
 import com.polycraft.slippyjuice.player.Player;
+import com.polycraft.slippyjuice.player.Properties;
+import com.polycraft.slippyjuice.scene.Scene;
 
 public class GameLoopEngine {
 	private GameLoopState gameLoopState;
 	private Player player;
-	private float acceleration;
-	private float speed;
-	private static float LIMIT = 0.1f;
+	private Scene scene;
+	private static float LIMIT = 0.001f;
 
-	public GameLoopEngine(Player player) {
+	public GameLoopEngine(Player player, Scene scene) {
 		super();
-		acceleration = 0;
-		speed = 4;
 		this.player = player;
+		this.scene = scene;
 		gameLoopState = GameLoopState.CREATED;
 	}
 
 	public void update(float deltaTime) {
 		DecimalFormat df = new DecimalFormat("###.##");
 		// force of player to +X, like powers
-		float forceX = 0;
+		float forceX = 1;
 		// ground friction ( depends on the ground's type)
-		float forceFriction = 1f;
+		float forceFriction = player.getPropertie(Properties.FRICTION);
 		// player weight
-		float weight = player.getPropertie(Caracteristics.WEIGHT);
+		float weight = player.getPropertie(Properties.WEIGHT);
 
 		// player acceleration
-		Float playerAcceleration = player
-				.getPropertie(Caracteristics.ACCELERATION);
+		Float playerAcceleration = player.getPropertie(Properties.ACCELERATION);
 		// player speed
-		Float playerSpeed = player.getPropertie(Caracteristics.SPEED);
+		Float playerSpeed = player.getPropertie(Properties.SPEED);
 
 		// calculate New Acceleration
 		float newAcceleration = (forceX - forceFriction * playerSpeed) / weight;
@@ -46,13 +44,17 @@ public class GameLoopEngine {
 		float distance = (newSpeed + playerSpeed) * deltaTime / 2;
 
 		System.out.println("Player(" + weight + "g) Acc="
-				+ df.format(newAcceleration) + " Speed=" + df.format(newSpeed)
-				+ "m/s Dist=" + distance + "m");
+				+ df.format(playerAcceleration) + " Speed="
+				+ df.format(playerSpeed) + "m/s Dist=" + distance + "m");
 
-		player.getCharacter().translate(distance * 64, 0);
+		if (scene != null) {
+			scene.update(-distance);
+		}
 		// MAJ Acceleration
-		playerAcceleration = newAcceleration;
 		// MAJ Speed
-		playerSpeed = newSpeed;
+
+		// UPDATE MODEL
+		player.update(Properties.ACCELERATION, newAcceleration);
+		player.update(Properties.SPEED, newSpeed);
 	}
 }

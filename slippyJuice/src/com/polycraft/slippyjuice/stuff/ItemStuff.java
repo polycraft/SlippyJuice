@@ -1,7 +1,7 @@
 package com.polycraft.slippyjuice.stuff;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.polycraft.slippyjuice.player.Caracteristics;
+import com.polycraft.slippyjuice.player.Properties;
 
 public class ItemStuff extends Stuff {
 
@@ -10,13 +10,13 @@ public class ItemStuff extends Stuff {
 
 	public ItemStuff(Texture texture, String name, String definition,
 			Integer price, Integer rarity, Integer timeEffect,
-			Caracteristics caractAffected, Integer value) {
+			Properties caractAffected, Integer value) {
 		this(texture, name, definition, price, rarity);
 		addEffect(caractAffected, value);
 	}
 
 	public ItemStuff(Texture texture, String name, String definition,
-			Integer price, Integer rarity, Caracteristics caractAffected,
+			Integer price, Integer rarity, Properties caractAffected,
 			Integer value) {
 		this(texture, name, definition, price, rarity);
 		addEffect(caractAffected, value);

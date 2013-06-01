@@ -5,14 +5,14 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.polycraft.slippyjuice.player.Caracteristics;
+import com.polycraft.slippyjuice.player.Properties;
 
 public class Stuff {
 	protected Integer price;
 	protected Integer rarity;
 	protected String name;
 	protected String definition;
-	protected Map<Caracteristics, Integer> effects;
+	protected Map<Properties, Integer> effects;
 	protected Sprite sprite;
 
 	public Stuff(Texture texture, String name, String definition,
@@ -22,7 +22,7 @@ public class Stuff {
 		this.definition = definition;
 		this.price = price;
 		this.rarity = rarity;
-		this.effects = new HashMap<Caracteristics, Integer>();
+		this.effects = new HashMap<Properties, Integer>();
 		if (texture == null) {
 			// this.sprite = new Sprite(new Texture(
 			// Gdx.files.internal("data/textures/default.png")));
@@ -37,7 +37,7 @@ public class Stuff {
 	 * @param value
 	 * @return object with a new effect on the caracteristic
 	 */
-	public Stuff addEffect(Caracteristics caracteristics, Integer value) {
+	public Stuff addEffect(Properties caracteristics, Integer value) {
 		effects.put(caracteristics, value);
 		return this;
 	}
@@ -58,13 +58,13 @@ public class Stuff {
 		return definition;
 	}
 
-	public Map<Caracteristics, Integer> getEffects() {
+	public Map<Properties, Integer> getEffects() {
 		return effects;
 	}
 
 	public String toString() {
 		String outEffects = "";
-		for (Caracteristics caractAffected : effects.keySet()) {
+		for (Properties caractAffected : effects.keySet()) {
 			outEffects += caractAffected + ":" + effects.get(caractAffected)
 					+ "/";
 		}

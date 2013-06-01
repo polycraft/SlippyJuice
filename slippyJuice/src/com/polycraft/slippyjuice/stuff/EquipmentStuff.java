@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.polycraft.slippyjuice.player.Caracteristics;
+import com.polycraft.slippyjuice.player.Properties;
 import com.polycraft.slippyjuice.scene.character.BodyPartType;
 
 public class EquipmentStuff extends Stuff {
@@ -15,7 +15,7 @@ public class EquipmentStuff extends Stuff {
 
 	public EquipmentStuff(Texture texture, String name, String definition,
 			Integer price, Integer rarity, EquipmentType equipmentType,
-			Caracteristics caractAffected, Integer value,
+			Properties caractAffected, Integer value,
 			Map<BodyPartType, Sprite> spritesParts) {
 		this(texture, name, definition, price, rarity, equipmentType);
 		this.addEffect(caractAffected, value);
@@ -24,7 +24,7 @@ public class EquipmentStuff extends Stuff {
 
 	public EquipmentStuff(Texture texture, String name, String definition,
 			Integer price, Integer rarity, EquipmentType equipmentType,
-			Caracteristics caractAffected, Integer value) {
+			Properties caractAffected, Integer value) {
 		this(texture, name, definition, price, rarity, equipmentType);
 		this.addEffect(caractAffected, value);
 	}

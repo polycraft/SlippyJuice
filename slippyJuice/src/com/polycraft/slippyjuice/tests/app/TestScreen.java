@@ -11,7 +11,7 @@ public class TestScreen implements Screen {
 	public TestScreen(TestGame testGame, AssetManager assetManager) {
 		super();
 		// renderer = new TestRenderer();
-		renderer = new TestRenderer(assetManager);
+		renderer = new TestRendererCharacter(assetManager);
 		this.game = testGame;
 
 	}

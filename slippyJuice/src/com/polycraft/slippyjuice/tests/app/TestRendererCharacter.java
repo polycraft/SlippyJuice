@@ -14,10 +14,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.polycraft.slippyjuice.player.Caracteristics;
 import com.polycraft.slippyjuice.player.Feature;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
+import com.polycraft.slippyjuice.player.Properties;
 import com.polycraft.slippyjuice.renderers.Renderer;
 import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.scene.character.BodyPartType;
@@ -61,7 +61,7 @@ public class TestRendererCharacter extends Renderer {
 
 		// equipment
 		EquipmentStuff equip1 = new EquipmentStuff(null, "Masque", "blabla",
-				31, 5, EquipmentType.HELMET, Caracteristics.RESISTANCE, 21);
+				31, 5, EquipmentType.HELMET, Properties.DEFENCE, 21);
 
 		Texture texture = new Texture(
 				Gdx.files.internal("data/textures/equipments/mask1.png"));
@@ -84,8 +84,8 @@ public class TestRendererCharacter extends Renderer {
 						.internal("data/textures/equipments/armor1_arm.png"))));
 
 		EquipmentStuff equip2 = new EquipmentStuff(null, "Haut SpiderMan",
-				"blabla", 31, 5, EquipmentType.ARMOR,
-				Caracteristics.RESISTANCE, 21, spritePartsSpiderMan);
+				"blabla", 31, 5, EquipmentType.ARMOR, Properties.DEFENCE, 21,
+				spritePartsSpiderMan);
 
 		// inventory
 		Map<EquipmentType, Stuff> inventory = new HashMap<EquipmentType, Stuff>();
@@ -107,7 +107,7 @@ public class TestRendererCharacter extends Renderer {
 
 		human.setSkinColor(0, 0.5f, 1, 1);
 
-		gameLoopEngine = new GameLoopEngine(player);
+		gameLoopEngine = new GameLoopEngine(player, null);
 	}
 
 	@Override

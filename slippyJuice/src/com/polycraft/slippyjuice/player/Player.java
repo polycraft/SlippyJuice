@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 
 import com.polycraft.slippyjuice.scene.character.Character;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
@@ -11,11 +12,11 @@ import com.polycraft.slippyjuice.stuff.EquipmentType;
 import com.polycraft.slippyjuice.stuff.ItemStuff;
 import com.polycraft.slippyjuice.stuff.Stuff;
 
-public class Player {
+public class Player extends Observable {
 	private PlayerInformation playerInformation;
 	private List<Stuff> stuffs;
 	private Map<EquipmentType, Stuff> inventory;
-	private Map<Caracteristics, Float> properties;
+	private Map<Properties, Float> properties;
 	private Character character;
 
 	public Player(PlayerInformation information) {
@@ -23,24 +24,25 @@ public class Player {
 	}
 
 	public Player(PlayerInformation information, Float speed, Float weight,
-			Float resistance) {
+			Float defence) {
 		this(information, new Float(100), new Float(100), new Float(0), speed,
-				new Float(0), weight, resistance);
+				new Float(0), weight, new Float(1), defence);
 	}
 
 	public Player(PlayerInformation playerInformation, Float health,
 			Float vomit, Float overJuice, Float speed, Float acceleration,
-			Float weight, Float resistance) {
+			Float weight, Float friction, Float defence) {
 		super();
 		this.playerInformation = playerInformation;
-		this.properties = new HashMap<Caracteristics, Float>();
-		this.properties.put(Caracteristics.SPEED, speed);
-		this.properties.put(Caracteristics.ACCELERATION, acceleration);
-		this.properties.put(Caracteristics.HEALTH, health);
-		this.properties.put(Caracteristics.RESISTANCE, resistance);
-		this.properties.put(Caracteristics.WEIGHT, weight);
-		this.properties.put(Caracteristics.VOMIT, vomit);
-		this.properties.put(Caracteristics.OVERJUICE, overJuice);
+		this.properties = new HashMap<Properties, Float>();
+		this.properties.put(Properties.SPEED, speed);
+		this.properties.put(Properties.ACCELERATION, acceleration);
+		this.properties.put(Properties.HEALTH, health);
+		this.properties.put(Properties.DEFENCE, defence);
+		this.properties.put(Properties.WEIGHT, weight);
+		this.properties.put(Properties.VOMIT, vomit);
+		this.properties.put(Properties.OVERJUICE, overJuice);
+		this.properties.put(Properties.FRICTION, friction);
 		this.inventory = new HashMap<EquipmentType, Stuff>();
 		this.stuffs = new ArrayList<Stuff>();
 	}
@@ -93,7 +95,7 @@ public class Player {
 	}
 
 	private void useEffects(ItemStuff item) {
-		for (Caracteristics caracteristics : Caracteristics.values()) {
+		for (Properties caracteristics : Properties.values()) {
 			Float temp = new Float(this.properties.get(caracteristics)
 					.floatValue());
 			if (item.getEffects().get(caracteristics) != null) {
@@ -105,7 +107,7 @@ public class Player {
 
 	public String toString() {
 		String outProperties = "";
-		for (Caracteristics caracteristics : Caracteristics.values()) {
+		for (Properties caracteristics : Properties.values()) {
 			outProperties += "" + caracteristics + ":"
 					+ properties.get(caracteristics) + ",";
 		}
@@ -130,8 +132,11 @@ public class Player {
 		return inventory;
 	}
 
-	public Float getPropertie(Caracteristics caracteristic) {
-		return this.properties.get(caracteristic);
+	public Float getPropertie(Properties caracteristic) {
+		if (this.properties.get(caracteristic) == null)
+			return new Float(0);
+		else
+			return this.properties.get(caracteristic);
 	}
 
 	public Character getCharacter() {
@@ -140,6 +145,12 @@ public class Player {
 
 	public void setCharacter(Character character) {
 		this.character = character;
+	}
+
+	public void update(Properties caracteristic, Float value) {
+		this.properties.put(caracteristic, value);
+		setChanged();
+		notifyObservers();
 	}
 
 }

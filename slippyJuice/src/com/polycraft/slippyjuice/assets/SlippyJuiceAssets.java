@@ -26,6 +26,8 @@ public class SlippyJuiceAssets {
 		manager.load("data/textures/skin/head.png", Texture.class);
 		manager.load("data/cubeTest.png", Texture.class);
 		manager.load("data/groundPiece.png", Texture.class);
+		manager.load("data/textures/backgrounds/mountain.png", Texture.class);
+		manager.load("data/textures/backgrounds/hill.png", Texture.class);
 
 	}
 }
