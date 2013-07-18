@@ -105,7 +105,7 @@ public class TestRendererCharacter extends Renderer {
 		human.setFeatures(features);
 		human.setInventory(inventory);
 
-		human.setSkinColor(0, 0.5f, 1, 1);
+		human.setSkinColor(1f, 1f, 1, 1);
 
 		gameLoopEngine = new GameLoopEngine(player, null);
 	}

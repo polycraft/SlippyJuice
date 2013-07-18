@@ -22,7 +22,6 @@ public class PathGenerator {
 	 */
 	public void generatePath() {
 		Pattern pattern = patterns.get(actualPatternType);
-
 	}
 
 	public void putPattern(PatternType patternType, Pattern pattern) {
