@@ -37,20 +37,26 @@
 <p>On va utiliser le logiciel eclipse fournit par le SDK android <a href="http://developer.android.com/sdk/index.html#ExistingIDE">ICI</a> (32 ou 64 bits).
 <img src="http://developer.android.com/images/sdk-cube.png" alt="test"></p>
 
-<p>Après avoir téléchargé cela, nous avons eclipse et le Android SDK Tools qui permet d'installer les version android que l'on veut. Pour le moment choisir la version par défaut car tout cela peut être fait plus tard. La procédure à suivre ensuite est indiqué sur cette page : <a href="http://developer.android.com/sdk/installing/index.html">ICI</a>.</p>
+<p>Après avoir téléchargé cela, nous avons eclipse et le SDK manager.
+Il vaut mieux décompresser le .zip dans un endroit bien définit car nous y ferons référence dans eclipse.</p>
 
-<p>Lancer le .exe donc et se laisser guider. Cela ne concerne pas eclipse mais la version android + emulateur android (ADT plugin).</p>
+<p>Une fois décompressé, lancer le "SDK Manager.exe" et se laisser guider. Cela ne concerne pas eclipse mais la version android + emulateur android (ADT plugin). Cet outil permet de gérer l'installation des modules android comme la version du SDK, les APIs des versions android. On va prendre le Android SDK TOols + l'API 10 (v2.3.3 d'android). Selectionner les package puis cliquer sur installer. Cocher les licenses pour pouvoir installer.</p>
 
-<p>Le dossier contenant eclipse est à mettre là où on le souhaite. Mais les chemins conseillé sont les suivants:
--Pour le 32 bits : C:ProgramFiles/Eclipse
--Pour le 64 bits : C:Programmes/Eclipse</p>
+<p>Eclipse :
+Le dossier contenant eclipse est à mettre par exemple dans:</p>
+
+<p>-Pour le 32 bits : C:ProgramFiles/Eclipse</p>
+
+<p>-Pour le 64 bits : C:Programmes/Eclipse</p>
+
+<p>On va lancer Eclipse maintenant juste pour créer le dossier "workspace" des projets. Il peut être fermé ensuite.</p>
 
 <p>Fin de l'étape. Maintenant passons à GIT ! </p>
 
 <h3>
 <a name="inscription-sur-github" class="anchor" href="#inscription-sur-github"><span class="octicon octicon-link"></span></a>Inscription sur GitHub</h3>
 
-<p>Pour commencer il faut un compte sur <a href="http://www.github.com">www.github.com</a>. Cela créera un pseudo sous lequel chaque commit sera enregistré.</p>
+<p>Pour commencer il faut un compte sur <a href="http://www.github.com">www.github.com</a>. Cela créera un pseudo sous lequel chaque commit sera enregistré. On prendra l'exemple de "jhonr" comme pseudo dans la suite.</p>
 
 <h3>
 <a name="rejoindre-polycraft" class="anchor" href="#rejoindre-polycraft"><span class="octicon octicon-link"></span></a>Rejoindre Polycraft</h3>
@@ -61,6 +67,22 @@
 <a name="g%C3%A9n%C3%A9rer-un-clef-ssh-permet-dauthentifier-le-pc-de-d%C3%A9veloppement" class="anchor" href="#g%C3%A9n%C3%A9rer-un-clef-ssh-permet-dauthentifier-le-pc-de-d%C3%A9veloppement"><span class="octicon octicon-link"></span></a>Générer un clef SSH (permet d'authentifier le PC de développement)</h3>
 
 <p>Pour participer au développement il va falloir générer une clef SSH sur l'ordinateur de développement. Pour cela une section et dédiée sur le site github <a href="https://help.github.com/articles/generating-ssh-keys">ICI</a>.</p>
+
+<p>Avec le logiciel pour windows, la clef ssh est créée sans le voir. Donc on télécharge l'application GitHub.
+Installation de cette dernière puis lancement. La phase de détection des repositories peut être passée. </p>
+
+<p>Après s'être connecté sur l'application à l'aide du pseudo et du mot de passe on va importer le projet. On va le mettre directement dans le dossier "workspace" d'éclipse. Pour cela on va dans "Polycraft" puis sur le projet SlippyJuice clic droit et "clone to". On selectionne alors le dossier "workspace". Puis on valide.</p>
+
+<p>Le projet est cloné dans le dossier voulu, la clef SSH est créée dans les documents dans /.ssh  et enfin cette clef est automatiquement ajoutée au compte github. Magnifique, on peut fermer l'application GitHub.</p>
+
+<p>On va repasser à la phase finale dans Eclipse.</p>
+
+<h3>
+<a name="plugin-eclipse-pour-git" class="anchor" href="#plugin-eclipse-pour-git"><span class="octicon octicon-link"></span></a>Plugin Eclipse pour GIT</h3>
+
+<p>Pour se faciliter le développement on va installer un plugin eclipse pour gérer les commits. Il s'appelle "Eclipse EGIT".</p>
+
+<p>Pour l'installer on va démarrer l'Eclipse téléchargé avec le SDK d'Android. Une fois dans Eclipse, aller dans Help/Install New Software. Dans le champ "Work with" mettre l'adresse du plugin : <a href="http://download.eclipse.org/egit/updates">http://download.eclipse.org/egit/updates</a> puis cliquer sur "Add" et donner un nom quelconque à ce lien. Une fois validé, </p>
 
 <p>Installer l'application gitHub. </p>
       </section>
