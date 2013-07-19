@@ -4,6 +4,7 @@ public enum Properties {
 	SPEED("speed"), ACCELERATION("acceleration"), HEALTH("health"), FRICTION(
 			"friction"), VOMIT("vomit"), DEFENCE("defence"), OVERJUICE(
 			"overjuice"), WEIGHT("weight");
+	;;;;
 
 	private final String code;
 
