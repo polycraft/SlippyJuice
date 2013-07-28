@@ -20,6 +20,10 @@ public class GameLoopEngine {
 	}
 
 	public void update(float deltaTime) {
+		simulate(deltaTime);
+	}
+
+	private void simulate(float deltaTime) {
 		DecimalFormat df = new DecimalFormat("###.##");
 		// force of player to +X, like powers
 		float forceX = 1;
