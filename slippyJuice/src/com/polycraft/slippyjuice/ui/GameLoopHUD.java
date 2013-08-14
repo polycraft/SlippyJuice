@@ -10,10 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.Properties;
+import com.polycraft.slippyjuice.simulation.GameLoopEngine;
 
 public class GameLoopHUD extends HUD {
 
 	private Label debugInfos;
+	private Label totalDistance;
 	private DecimalFormat df = new DecimalFormat("###.##");
 
 	public GameLoopHUD(AssetManager assetManager) {
@@ -38,6 +40,11 @@ public class GameLoopHUD extends HUD {
 		debugInfos.setPosition(0, this.getHeight() - debugInfos.getHeight()
 				- 10);
 		addActor(debugInfos);
+
+		totalDistance = new Label("", skinUI);
+		totalDistance.setPosition(0,
+				this.getHeight() - totalDistance.getHeight() - 40);
+		addActor(totalDistance);
 	}
 
 	@Override
@@ -52,6 +59,12 @@ public class GameLoopHUD extends HUD {
 					+ "m/s²" + ", speed :"
 					+ df.format(player.getPropertie(Properties.SPEED)) + "m/s");
 			System.out.println("player updated");
+		}
+		if (GameLoopEngine.class.isInstance(obs)) {
+			GameLoopEngine engine = (GameLoopEngine) obs;
+
+			totalDistance
+					.setText("TotalDistance: " + engine.getTotalDistance());
 		}
 	}
 }

@@ -31,4 +31,8 @@ public abstract class Renderer {
 		return this.scene;
 	}
 
+	public HUD getHud() {
+		return hud;
+	}
+
 }

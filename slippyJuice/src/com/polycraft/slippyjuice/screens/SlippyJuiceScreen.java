@@ -8,6 +8,7 @@ import com.polycraft.slippyjuice.renderers.Renderer;
 public abstract class SlippyJuiceScreen implements Screen {
 	protected SlippyJuice game;
 	protected Renderer renderer;
+
 	protected AssetManager assetManager;
 
 	public SlippyJuiceScreen(SlippyJuice game, AssetManager assetManager) {

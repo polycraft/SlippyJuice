@@ -107,7 +107,7 @@ public class TestRendererCharacter extends Renderer {
 
 		human.setSkinColor(1f, 1f, 1, 1);
 
-		gameLoopEngine = new GameLoopEngine(player, null);
+		gameLoopEngine = new GameLoopEngine(player, null, assetManager);
 	}
 
 	@Override

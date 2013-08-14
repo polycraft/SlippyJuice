@@ -14,7 +14,8 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 	private Player player;
 	private GameLoopEngine gameLoopEngine;
 
-	public GameLoopScreen(SlippyJuice game, AssetManager assetManager) {
+	public GameLoopScreen(float height, float width, SlippyJuice game,
+			AssetManager assetManager) {
 		super(game, assetManager);
 
 		PlayerInformation playerInformation = new PlayerInformation("TEST", 0,
@@ -22,8 +23,12 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 		player = new Player(playerInformation);
 		player.setCharacter(new Character(assetManager, 100, 100, 100, 100));
 
-		renderer = new GameLoopRenderer(assetManager, player);
-		gameLoopEngine = new GameLoopEngine(player, renderer.getScene());
+		renderer = new GameLoopRenderer(height, width, assetManager, player);
+		gameLoopEngine = new GameLoopEngine(player, renderer.getScene(),
+				assetManager);
+
+		gameLoopEngine.addObserver(renderer.getHud());
+
 	}
 
 	@Override
@@ -35,6 +40,7 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 		renderer.render(deltaTime, this.gameLoopEngine);
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setLoading("menu"); // test switching screens
+
 	}
 
 	@Override

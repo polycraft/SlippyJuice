@@ -7,14 +7,18 @@ import com.polycraft.slippyjuice.SlippyJuice;
 import com.polycraft.slippyjuice.renderers.MainMenuRenderer;
 
 public class MainMenuScreen extends SlippyJuiceScreen {
-	public MainMenuScreen(SlippyJuice game, AssetManager assetManager) {
+
+	public MainMenuScreen(float height, float width, SlippyJuice game,
+			AssetManager assetManager) {
 		super(game, assetManager);
-		renderer = new MainMenuRenderer(assetManager);
+		renderer = new MainMenuRenderer(height, width, assetManager);
+
 	}
 
 	@Override
 	public void render(float delta) {
 		renderer.render(delta);
+
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setLoading("game"); // test switching screens
 

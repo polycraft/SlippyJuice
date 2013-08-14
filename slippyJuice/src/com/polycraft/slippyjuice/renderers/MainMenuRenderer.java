@@ -13,17 +13,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.polycraft.slippyjuice.ui.MainMenuHUD;
 
 public class MainMenuRenderer extends Renderer {
+
+	private Sprite titleSprite;
 	private Skin skinUI;
 	private Label testText;
-	private Sprite titleSprite;
 
-	public MainMenuRenderer(AssetManager assetManager) {
+	public MainMenuRenderer(float height, float width, AssetManager assetManager) {
 		super(assetManager);
-		float width = Gdx.graphics.getWidth();
-		float height = Gdx.graphics.getHeight();
 
 		camera = new OrthographicCamera(width, height);
 		batch = new SpriteBatch();
+
 		hud = new MainMenuHUD(assetManager, width, height, true, batch);
 		Gdx.input.setInputProcessor(hud);
 

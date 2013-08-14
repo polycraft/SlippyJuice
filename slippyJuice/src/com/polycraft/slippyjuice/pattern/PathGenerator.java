@@ -5,14 +5,14 @@ import java.util.Map;
 
 public class PathGenerator {
 
-	private Map<PatternType, Pattern> patterns;
+	private Map<PatternType, GroundPattern> patterns;
 	private PatternType actualPatternType;
 
 	public PathGenerator() {
-		this(new HashMap<PatternType, Pattern>());
+		this(new HashMap<PatternType, GroundPattern>());
 	}
 
-	public PathGenerator(Map<PatternType, Pattern> patterns) {
+	public PathGenerator(Map<PatternType, GroundPattern> patterns) {
 		this.patterns = patterns;
 		this.actualPatternType = PatternType.NONE;
 	}
@@ -21,10 +21,10 @@ public class PathGenerator {
 	 * Most important method for generating path
 	 */
 	public void generatePath() {
-		Pattern pattern = patterns.get(actualPatternType);
+		GroundPattern pattern = patterns.get(actualPatternType);
 	}
 
-	public void putPattern(PatternType patternType, Pattern pattern) {
+	public void putPattern(PatternType patternType, GroundPattern pattern) {
 		patterns.put(patternType, pattern);
 	}
 }
