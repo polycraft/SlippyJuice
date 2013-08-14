@@ -30,6 +30,8 @@ import com.polycraft.slippyjuice.stuff.Stuff;
 public class TestRendererCharacter extends Renderer {
 
 	Character human;
+	Player player;
+	EquipmentStuff equip1;
 	GameLoopEngine gameLoopEngine;
 
 	public TestRendererCharacter(AssetManager assetManager) {
@@ -57,11 +59,12 @@ public class TestRendererCharacter extends Renderer {
 		// un joueur
 		PlayerInformation playerInformation = new PlayerInformation("Bob", 10,
 				1);
-		Player player = new Player(playerInformation);
+		player = new Player(playerInformation);
+		player.setCharacter(human);
 
 		// equipment
-		EquipmentStuff equip1 = new EquipmentStuff(null, "Masque", "blabla",
-				31, 5, EquipmentType.HELMET, Properties.DEFENCE, 21);
+		equip1 = new EquipmentStuff(null, "Masque", "blabla", 31, 5,
+				EquipmentType.HELMET, Properties.DEFENCE, 21);
 
 		Texture texture = new Texture(
 				Gdx.files.internal("data/textures/equipments/mask1.png"));
@@ -91,10 +94,10 @@ public class TestRendererCharacter extends Renderer {
 		Map<EquipmentType, Stuff> inventory = new HashMap<EquipmentType, Stuff>();
 
 		// inventory.put(equip1.getEquipmentType(), equip1);
-		inventory.put(equip2.getEquipmentType(), equip2);
+		// inventory.put(equip2.getEquipmentType(), equip2);
 
-		// player.addStuff(equip1);
-		// player.equip(equip1);
+		player.addStuff(equip1);
+		player.equip(equip1);
 
 		Feature featureTest = new Feature(0, "test", BodyPartType.HEAD,
 				new Texture(
@@ -103,16 +106,16 @@ public class TestRendererCharacter extends Renderer {
 		features.add(featureTest);
 
 		human.setFeatures(features);
-		human.setInventory(inventory);
+		// human.setInventory(inventory);
 
-		human.setSkinColor(1f, 1f, 1, 1);
+		human.setSkinColor(1, 1, 1, 1);
 
 		gameLoopEngine = new GameLoopEngine(player, null, assetManager);
 	}
 
 	@Override
 	public void render(float delta) {
-		gameLoopEngine.update(delta);
+		// gameLoopEngine.update(delta);
 		// init the background color
 		Gdx.gl.glClearColor(2, 2, 2, 2);
 		// actualise le background
@@ -162,6 +165,12 @@ public class TestRendererCharacter extends Renderer {
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.L)) {
 			human.rotateHead(-2);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+			player.unequip(equip1);
+		}
+		if (Gdx.input.isKeyPressed(Input.Keys.PLUS)) {
+			player.equip(equip1);
 		}
 
 	}
