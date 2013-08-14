@@ -57,6 +57,7 @@ public class GameLoopEngine extends Observable {
 		updateScene();
 	}
 
+
 	private float simulate(float deltaTime) {
 		DecimalFormat df = new DecimalFormat("###.##");
 		// force of player to +X, like powers
