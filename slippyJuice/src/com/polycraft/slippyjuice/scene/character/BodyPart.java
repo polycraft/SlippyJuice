@@ -10,12 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 public class BodyPart extends Group {
 	Sprite skin;
-	List<Sprite> decals;
+	List<Sprite> skinDecals;
+	List<Sprite> stuffDecals;
 
 	public BodyPart(Texture texture, float x, float y) {
 		super();
 		skin = new Sprite(texture);
-		decals = new ArrayList<Sprite>();
+		skinDecals = new ArrayList<Sprite>();
+		stuffDecals = new ArrayList<Sprite>();
 
 		setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
 		setSize(texture.getWidth(), texture.getHeight());
@@ -25,7 +27,8 @@ public class BodyPart extends Group {
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		drawSkin(batch, parentAlpha);
-		drawDecals(batch, parentAlpha);
+		drawDecals(batch, skinDecals, parentAlpha);
+		drawDecals(batch, stuffDecals, parentAlpha);
 		super.draw(batch, parentAlpha);
 	}
 
@@ -38,7 +41,8 @@ public class BodyPart extends Group {
 		skin.draw(batch, parentAlpha);
 	}
 
-	private void drawDecals(SpriteBatch batch, float parentAlpha) {
+	private void drawDecals(SpriteBatch batch, List<Sprite> decals,
+			float parentAlpha) {
 		for (Sprite sprite : decals) {
 			sprite.setOrigin(getOriginX(), getOriginY());
 			sprite.setPosition(getX(), getY());
@@ -48,11 +52,19 @@ public class BodyPart extends Group {
 		}
 	}
 
-	public void addDecal(Sprite sprite) {
-		decals.add(sprite);
+	public void addSkinDecal(Sprite sprite) {
+		skinDecals.add(sprite);
 	}
 
-	public void clearDecals() {
-		this.decals.clear();
+	public void clearSkinDecals() {
+		this.skinDecals.clear();
+	}
+
+	public void addStuffDecal(Sprite sprite) {
+		stuffDecals.add(sprite);
+	}
+
+	public void clearStuffDecals() {
+		this.stuffDecals.clear();
 	}
 }

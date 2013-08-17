@@ -59,6 +59,8 @@ public class Player extends Observable {
 			EquipmentStuff equipment = (EquipmentStuff) stuffToEquip;
 			holdStuff = this.inventory.put(equipment.getEquipmentType(),
 					equipment);
+			// update character skin inventory
+			updateCharacter();
 		} else {
 			System.out.println("NOT (EQUIPMENT OR IN BAG): " + stuffToEquip);
 		}
@@ -76,6 +78,8 @@ public class Player extends Observable {
 			EquipmentStuff equipment = (EquipmentStuff) stuffToUnEquip;
 			this.inventory.remove(equipment.getEquipmentType());
 			this.stuffs.add(equipment);
+			// update character skin inventory
+			updateCharacter();
 		} else {
 			System.out.println("NOT AN EQUIPMENT OR NOT IN THE EQUIPMENT: "
 					+ stuffToUnEquip);
@@ -103,6 +107,10 @@ public class Player extends Observable {
 			}
 			this.properties.put(caracteristics, temp);
 		}
+	}
+
+	private void updateCharacter() {
+		this.character.setInventory(inventory);
 	}
 
 	public String toString() {

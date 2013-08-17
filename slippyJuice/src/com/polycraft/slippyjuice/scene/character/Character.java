@@ -94,6 +94,8 @@ public class Character extends Group {
 	}
 
 	public void setInventory(Map<EquipmentType, Stuff> inventory) {
+		// remove all before
+		removeInventory();
 		// all inventorys
 		for (EquipmentType type : inventory.keySet()) {
 
@@ -104,7 +106,7 @@ public class Character extends Group {
 					.keySet()) {
 				// if this part exist
 				if (this.bodyParts.containsKey(bodyPartType)) {
-					bodyParts.get(bodyPartType).addDecal(
+					bodyParts.get(bodyPartType).addStuffDecal(
 							equipmentStuff.getSpritesParts().get(bodyPartType));
 				}
 			}
@@ -112,11 +114,38 @@ public class Character extends Group {
 	}
 
 	public void setFeatures(List<Feature> features) {
+		// remove all before
+		removeFeatures();
+		// then add all
 		for (Feature feature : features) {
 			if (this.bodyParts.containsKey(feature.getType().bodyPart())) {
-				this.bodyParts.get(feature.getType().bodyPart()).addDecal(
+				this.bodyParts.get(feature.getType().bodyPart()).addSkinDecal(
 						feature.getSprite());
 			}
+		}
+	}
+
+	public void removeInvetoryOn(BodyPartType type) {
+		if (this.bodyParts.containsKey(type)) {
+			bodyParts.get(type).clearStuffDecals();
+		}
+	}
+
+	public void removeFeaturesOn(BodyPartType type) {
+		if (this.bodyParts.containsKey(type)) {
+			bodyParts.get(type).clearSkinDecals();
+		}
+	}
+
+	public void removeInventory() {
+		for (BodyPartType bodyPartType : this.bodyParts.keySet()) {
+			this.bodyParts.get(bodyPartType).clearStuffDecals();
+		}
+	}
+
+	public void removeFeatures() {
+		for (BodyPartType bodyPartType : this.bodyParts.keySet()) {
+			this.bodyParts.get(bodyPartType).clearSkinDecals();
 		}
 	}
 
