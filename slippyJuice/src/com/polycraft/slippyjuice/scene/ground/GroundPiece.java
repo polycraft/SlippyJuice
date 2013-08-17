@@ -28,4 +28,9 @@ public class GroundPiece extends Actor {
 		sprite.draw(batch, parentAlpha);
 		super.draw(batch, parentAlpha);
 	}
+
+	public void destroy() {
+		// destroy piece
+		remove();
+	}
 }

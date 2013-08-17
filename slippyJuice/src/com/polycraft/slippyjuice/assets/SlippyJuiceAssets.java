@@ -33,6 +33,7 @@ public class SlippyJuiceAssets {
 		manager.load(getPath("mountain"), Texture.class);
 		manager.load(getPath("hill"), Texture.class);
 
+		// manager.load(getPath("vomitP"), ParticleEffect);
 	}
 
 	private void buildPaths() {
@@ -50,6 +51,7 @@ public class SlippyJuiceAssets {
 		ressourcesPaths.put("mountain",
 				"data/textures/backgrounds/mountain.png");
 		ressourcesPaths.put("hill", "data/textures/backgrounds/hill.png");
+		ressourcesPaths.put("vomitP", "data/particles/vomit.p");
 	}
 
 	public static String getPath(String key) {

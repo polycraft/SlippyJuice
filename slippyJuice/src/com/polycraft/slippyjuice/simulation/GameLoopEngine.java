@@ -8,6 +8,7 @@ import java.util.Observable;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.polycraft.slippyjuice.assets.SlippyJuiceAssets;
+import com.polycraft.slippyjuice.pattern.GroundGenerator;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.Properties;
 import com.polycraft.slippyjuice.scene.LayerType;
@@ -20,6 +21,9 @@ public class GameLoopEngine extends Observable {
 	private GameLoopState gameLoopState;
 	private Player player;
 	private Scene scene;
+
+	private GroundGenerator groundGenerator;
+
 	private static float LIMIT = 0.001f;
 
 	private float totalDistance;
@@ -31,6 +35,7 @@ public class GameLoopEngine extends Observable {
 		gameLoopState = GameLoopState.CREATED;
 		totalDistance = 0;
 		this.assetManager = assetManager;
+		groundGenerator = new GroundGenerator(assetManager, 4, 15);
 		// / a deporter
 		buildScene();
 	}
@@ -56,7 +61,6 @@ public class GameLoopEngine extends Observable {
 
 		updateScene();
 	}
-
 
 	private float simulate(float deltaTime) {
 		DecimalFormat df = new DecimalFormat("###.##");
@@ -106,7 +110,7 @@ public class GameLoopEngine extends Observable {
 			}
 			if (ground.isAddLines()) {
 				// ajouter un générateur
-				ground.addPieces(generateNewPieces());
+				ground.addPieces(groundGenerator.generatePath());
 			}
 		}
 

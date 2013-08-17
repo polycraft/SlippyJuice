@@ -60,7 +60,7 @@ public class Ground extends Layer {
 
 	public void deletePieces(int nbLines) {
 		for (int i = 0; i < NB_LINES_GROUND * nbLines; i++) {
-			groundPieces.get(0).remove();
+			groundPieces.get(0).destroy();
 			groundPieces.remove(0);
 		}
 		deleteLines = false;
