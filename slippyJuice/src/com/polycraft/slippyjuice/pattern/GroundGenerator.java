@@ -8,7 +8,7 @@ import java.util.Map;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import com.polycraft.slippyjuice.assets.SlippyJuiceAssets;
+import com.polycraft.slippyjuice.assetsmanagement.SlippyJuiceAssets;
 import com.polycraft.slippyjuice.scene.ground.GroundPiece;
 
 public class GroundGenerator {

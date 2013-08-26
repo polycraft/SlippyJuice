@@ -11,19 +11,22 @@ public class ParticleEffectActor extends Actor {
 		this.effect = effect;
 	}
 
+	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
-		effect.draw(batch); // define behavior when stage calls Actor.draw()
+		effect.draw(batch, 1 - parentAlpha);
+		super.draw(batch, parentAlpha);
 	}
 
+	@Override
 	public void act(float delta) {
-		super.act(delta);
 		effect.setPosition(this.getX(), this.getY()); // set to whatever x/y you
-														// prefer
+		// prefer
 		effect.update(delta); // update it
-		effect.start(); // need to start the particle spawning
+		super.act(delta);
 	}
 
 	public ParticleEffect getEffect() {
 		return effect;
 	}
+
 }

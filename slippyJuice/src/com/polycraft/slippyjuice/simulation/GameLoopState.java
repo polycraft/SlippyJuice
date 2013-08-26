@@ -3,7 +3,7 @@ package com.polycraft.slippyjuice.simulation;
 // The decorations : hairs, eyes etc...
 
 public enum GameLoopState {
-	CREATED(0), START(1), RUN(2), PAUSED(3), STOPPED(4);
+	READY(0), RUNNING(1), PAUSED(2), STOPPED(3);
 
 	private final Integer code;
 

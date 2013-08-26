@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.polycraft.slippyjuice.player.Feature;
 import com.polycraft.slippyjuice.stuff.EquipmentStuff;
 import com.polycraft.slippyjuice.stuff.EquipmentType;
@@ -16,6 +19,7 @@ import com.polycraft.slippyjuice.stuff.Stuff;
 
 public class Character extends Group {
 
+	private CharacterState state;
 	private BodyPart body;
 	private BodyPart leftArm;
 	private BodyPart rightArm;
@@ -31,6 +35,7 @@ public class Character extends Group {
 		setOrigin(0, 0);
 		setPosition(x, y);
 		buildCharacter(assetManager);
+		state = CharacterState.WAITING;
 	}
 
 	protected void buildCharacter(AssetManager assetManager) {
@@ -74,6 +79,11 @@ public class Character extends Group {
 		bodyParts.put(BodyPartType.RIGHT_ARM, rightArm);
 		this.addActor(rightArm);
 
+		// Vomit effect
+		ParticleEffect vomitEffect = new ParticleEffect();
+		vomitEffect.load(Gdx.files.internal("data/particles/vomit.p"),
+				Gdx.files.internal("data/particles"));
+		head.addParticleEffect(vomitEffect, 70, 70);
 	}
 
 	public void setSkinColor(Color color) {
@@ -149,6 +159,24 @@ public class Character extends Group {
 		}
 	}
 
+	// TODO
+	public void update(float speed) {
+		head.getParticlesEffects().get(0).getEffect().getEmitters().get(0)
+				.getWind().setHigh(-speed * 20);
+	}
+
+	public void run() {
+		if (!this.state.equals(CharacterState.RUNNING)) {
+			leftLeg.addAction(Actions.forever(Actions.sequence(
+					Actions.rotateBy(45, 1), Actions.rotateBy(-45, 1))));
+			state = CharacterState.RUNNING;
+		}
+	}
+
+	public void vomit() {
+		head.getParticlesEffects().get(0).getEffect().start();
+	}
+
 	public void rotateBody(float degrees) {
 		this.rotate(degrees);
 	}
@@ -195,6 +223,10 @@ public class Character extends Group {
 
 	public BodyPart getHead() {
 		return head;
+	}
+
+	public CharacterState getState() {
+		return state;
 	}
 
 }

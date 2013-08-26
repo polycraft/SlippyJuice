@@ -20,18 +20,18 @@ public class Player extends Observable {
 	private Character character;
 
 	public Player(PlayerInformation information) {
-		this(information, new Float(1), new Float(2), new Float(1));
+		this(information, new Float(0), new Float(2), new Float(1));
 	}
 
 	public Player(PlayerInformation information, Float speed, Float weight,
 			Float defence) {
 		this(information, new Float(100), new Float(100), new Float(0), speed,
-				new Float(0), weight, new Float(1), defence);
+				new Float(0), weight, new Float(1), defence, new Float(0));
 	}
 
 	public Player(PlayerInformation playerInformation, Float health,
 			Float vomit, Float overJuice, Float speed, Float acceleration,
-			Float weight, Float friction, Float defence) {
+			Float weight, Float friction, Float defence, Float forceX) {
 		super();
 		this.playerInformation = playerInformation;
 		this.properties = new HashMap<Properties, Float>();
@@ -43,6 +43,7 @@ public class Player extends Observable {
 		this.properties.put(Properties.VOMIT, vomit);
 		this.properties.put(Properties.OVERJUICE, overJuice);
 		this.properties.put(Properties.FRICTION, friction);
+		this.properties.put(Properties.FORCEX, forceX);
 		this.inventory = new HashMap<EquipmentType, Stuff>();
 		this.stuffs = new ArrayList<Stuff>();
 	}
@@ -155,10 +156,10 @@ public class Player extends Observable {
 		this.character = character;
 	}
 
-	public void update(Properties caracteristic, Float value) {
+	public void updatePropertie(Properties caracteristic, Float value) {
 		this.properties.put(caracteristic, value);
+		this.character.update(properties.get(Properties.SPEED));
 		setChanged();
 		notifyObservers();
 	}
-
 }

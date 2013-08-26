@@ -2,7 +2,7 @@ package com.polycraft.slippyjuice.tests.app;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.polycraft.slippyjuice.assets.SlippyJuiceAssets;
+import com.polycraft.slippyjuice.assetsmanagement.SlippyJuiceAssets;
 
 public class TestGame extends Game {
 

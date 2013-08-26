@@ -3,7 +3,7 @@ package com.polycraft.slippyjuice;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.polycraft.slippyjuice.assets.SlippyJuiceAssets;
+import com.polycraft.slippyjuice.assetsmanagement.SlippyJuiceAssets;
 import com.polycraft.slippyjuice.screens.GameLoopScreen;
 import com.polycraft.slippyjuice.screens.LoadingScreen;
 import com.polycraft.slippyjuice.screens.MainMenuScreen;

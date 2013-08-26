@@ -53,12 +53,14 @@ public class MainMenuHUD extends HUD {
 		addActor(button);
 
 		ParticleEffect p = new ParticleEffect();
-		p.load(Gdx.files.internal("data/particles/vomit.p"),
+		p.load(Gdx.files.internal("data/particles/dirt.p"),
 				Gdx.files.internal("data/particles"));
-		p.getEmitters().get(0).getVelocity().setHigh(1, 20);
+		// p.getEmitters().get(0).getVelocity().setHigh(1, 20);
 
 		ParticleEffectActor particleEffectActor = new ParticleEffectActor(p);
 		particleEffectActor.setPosition(100, 100);
 		addActor(particleEffectActor);
+
+		particleEffectActor.getEffect().start();
 	}
 }

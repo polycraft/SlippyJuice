@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.polycraft.slippyjuice.gamemodes.LimitedMode;
 import com.polycraft.slippyjuice.player.Feature;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
@@ -110,7 +111,8 @@ public class TestRendererCharacter extends Renderer {
 
 		human.setSkinColor(1, 1, 1, 1);
 
-		gameLoopEngine = new GameLoopEngine(player, null, assetManager);
+		gameLoopEngine = new GameLoopEngine(player, null, assetManager,
+				new LimitedMode());
 	}
 
 	@Override

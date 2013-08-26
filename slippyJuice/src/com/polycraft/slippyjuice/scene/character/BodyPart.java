@@ -4,24 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.polycraft.slippyjuice.scene.particles.ParticleEffectActor;
 
 public class BodyPart extends Group {
-	Sprite skin;
-	List<Sprite> skinDecals;
-	List<Sprite> stuffDecals;
+	private Sprite skin;
+	private List<Sprite> skinDecals;
+	private List<Sprite> stuffDecals;
+	private List<ParticleEffectActor> particlesEffects;
 
 	public BodyPart(Texture texture, float x, float y) {
 		super();
 		skin = new Sprite(texture);
 		skinDecals = new ArrayList<Sprite>();
 		stuffDecals = new ArrayList<Sprite>();
+		particlesEffects = new ArrayList<ParticleEffectActor>();
 
 		setOrigin(texture.getWidth() / 2, texture.getHeight() / 2);
 		setSize(texture.getWidth(), texture.getHeight());
 		setPosition(-texture.getWidth() / 2 + x, -texture.getHeight() / 2 + y);
+
 	}
 
 	@Override
@@ -29,8 +34,16 @@ public class BodyPart extends Group {
 		drawSkin(batch, parentAlpha);
 		drawDecals(batch, skinDecals, parentAlpha);
 		drawDecals(batch, stuffDecals, parentAlpha);
+		// drawParticles(batch, parentAlpha);
 		super.draw(batch, parentAlpha);
 	}
+
+	// private void drawParticles(SpriteBatch batch, float parentAlpha) {
+	// for (ParticleEffect particleEffect : particlesEffects) {
+	// particleEffect.setPosition(getX(), getY());
+	// particleEffect.draw(batch, parentAlpha);
+	// }
+	// }
 
 	private void drawSkin(SpriteBatch batch, float parentAlpha) {
 		skin.setOrigin(getOriginX(), getOriginY());
@@ -67,4 +80,18 @@ public class BodyPart extends Group {
 	public void clearStuffDecals() {
 		this.stuffDecals.clear();
 	}
+
+	public void addParticleEffect(ParticleEffect particleEffect, float x,
+			float y) {
+		ParticleEffectActor effectActor = new ParticleEffectActor(
+				particleEffect);
+		effectActor.setPosition(x, y);
+		particlesEffects.add(effectActor);
+		addActor(effectActor);
+	}
+
+	public List<ParticleEffectActor> getParticlesEffects() {
+		return particlesEffects;
+	}
+
 }

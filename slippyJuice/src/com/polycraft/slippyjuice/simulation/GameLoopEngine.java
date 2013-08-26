@@ -1,24 +1,21 @@
 package com.polycraft.slippyjuice.simulation;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
-import com.polycraft.slippyjuice.assets.SlippyJuiceAssets;
+import com.polycraft.slippyjuice.gamemodes.GameMode;
 import com.polycraft.slippyjuice.pattern.GroundGenerator;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.Properties;
 import com.polycraft.slippyjuice.scene.LayerType;
 import com.polycraft.slippyjuice.scene.Scene;
 import com.polycraft.slippyjuice.scene.ground.Ground;
-import com.polycraft.slippyjuice.scene.ground.GroundPiece;
 
 public class GameLoopEngine extends Observable {
 	private AssetManager assetManager;
 	private GameLoopState gameLoopState;
+
+	private GameMode gameMode;
 	private Player player;
 	private Scene scene;
 
@@ -28,16 +25,22 @@ public class GameLoopEngine extends Observable {
 
 	private float totalDistance;
 
-	public GameLoopEngine(Player player, Scene scene, AssetManager assetManager) {
+	public GameLoopEngine(Player player, Scene scene,
+			AssetManager assetManager, GameMode gameMode) {
 		super();
 		this.player = player;
 		this.scene = scene;
-		gameLoopState = GameLoopState.CREATED;
+
 		totalDistance = 0;
 		this.assetManager = assetManager;
 		groundGenerator = new GroundGenerator(assetManager, 4, 15);
 		// / a deporter
 		buildScene();
+		updateScene();
+
+		this.gameMode = gameMode;
+
+		setState(GameLoopState.READY);
 	}
 
 	private void buildScene() {
@@ -52,6 +55,26 @@ public class GameLoopEngine extends Observable {
 	}
 
 	public void update(float deltaTime) {
+		switch (gameLoopState) {
+		case READY:
+			setState(GameLoopState.RUNNING);
+			break;
+		case RUNNING:
+			run(deltaTime);
+			break;
+		case PAUSED:
+
+			break;
+		case STOPPED:
+
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	private void run(float deltaTime) {
 		float distance = simulate(deltaTime);
 		moveDistance(distance);
 
@@ -60,19 +83,19 @@ public class GameLoopEngine extends Observable {
 		}
 
 		updateScene();
+
+		gameMode.runMode(deltaTime, player);
 	}
 
 	private float simulate(float deltaTime) {
-		DecimalFormat df = new DecimalFormat("###.##");
 		// force of player to +X, like powers
-		float forceX = 20;
+		float forceX = player.getPropertie(Properties.FORCEX);
+		// float forceX = 30;
 		// ground friction ( depends on the ground's type)
 		float forceFriction = player.getPropertie(Properties.FRICTION);
 		// player weight
 		float weight = player.getPropertie(Properties.WEIGHT);
 
-		// player acceleration
-		Float playerAcceleration = player.getPropertie(Properties.ACCELERATION);
 		// player speed
 		Float playerSpeed = player.getPropertie(Properties.SPEED);
 
@@ -95,8 +118,8 @@ public class GameLoopEngine extends Observable {
 		// MAJ Speed
 
 		// UPDATE MODEL
-		player.update(Properties.ACCELERATION, newAcceleration);
-		player.update(Properties.SPEED, newSpeed);
+		player.updatePropertie(Properties.ACCELERATION, newAcceleration);
+		player.updatePropertie(Properties.SPEED, newSpeed);
 
 		return distance;
 	}
@@ -116,16 +139,6 @@ public class GameLoopEngine extends Observable {
 
 	}
 
-	private List<GroundPiece> generateNewPieces() {
-		List<GroundPiece> pieces = new ArrayList<GroundPiece>();
-		for (int i = 0; i < 4; i++) {
-			GroundPiece piece = new GroundPiece(assetManager.get(
-					SlippyJuiceAssets.getPath("groundPiece"), Texture.class));
-			pieces.add(piece);
-		}
-		return pieces;
-	}
-
 	private void moveDistance(float distance) {
 		totalDistance += distance;
 		setChanged();
@@ -134,6 +147,15 @@ public class GameLoopEngine extends Observable {
 
 	public float getTotalDistance() {
 		return totalDistance;
+	}
+
+	public GameLoopState getState() {
+		return gameLoopState;
+	}
+
+	public void setState(GameLoopState gameLoopState) {
+		this.gameLoopState = gameLoopState;
+		System.out.println("Game " + gameLoopState);
 	}
 
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
 import com.polycraft.slippyjuice.SlippyJuice;
+import com.polycraft.slippyjuice.gamemodes.LimitedMode;
 import com.polycraft.slippyjuice.player.Player;
 import com.polycraft.slippyjuice.player.PlayerInformation;
 import com.polycraft.slippyjuice.renderers.GameLoopRenderer;
@@ -25,7 +26,7 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 
 		renderer = new GameLoopRenderer(height, width, assetManager, player);
 		gameLoopEngine = new GameLoopEngine(player, renderer.getScene(),
-				assetManager);
+				assetManager, new LimitedMode());
 
 		gameLoopEngine.addObserver(renderer.getHud());
 
@@ -41,6 +42,10 @@ public class GameLoopScreen extends SlippyJuiceScreen {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER))
 			game.setLoading("menu"); // test switching screens
 
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			player.getCharacter().vomit();
+			System.out.println("vomit");
+		}
 	}
 
 	@Override

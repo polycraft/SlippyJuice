@@ -1,4 +1,4 @@
-package com.polycraft.slippyjuice.assets;
+package com.polycraft.slippyjuice.assetsmanagement;
 
 import java.util.HashMap;
 import java.util.Map;
